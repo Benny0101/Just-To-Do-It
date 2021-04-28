@@ -1,3 +1,5 @@
 # Just-To-Do-It
 
-Any useful information can go here
+Write what you are currently working on here:
+
+Ben: Working out which database to use and how to add stuff to the database
