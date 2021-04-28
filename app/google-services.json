@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "793870538741",
+    "project_id": "justtodoit-766e8",
+    "storage_bucket": "justtodoit-766e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793870538741:android:70b820636c6caa3257b2bc",
+        "android_client_info": {
+          "package_name": "com.example.justtodoit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "793870538741-9q0v0nu3g8ee6dk80l120n5b6v6512r1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.justtodoit",
+            "certificate_hash": "7f02ace0fddcfaf0bd0cec44f05b306734cdd40c"
+          }
+        },
+        {
+          "client_id": "793870538741-lt3mu1mrnultbbgj457spldj182qr6e7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL-9o_vGqtXoI7CpE23LpNSp-09BI9iyU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "793870538741-lt3mu1mrnultbbgj457spldj182qr6e7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
