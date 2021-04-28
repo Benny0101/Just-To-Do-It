@@ -7,11 +7,13 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.lang.Exception
 
 class LoginActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +30,9 @@ class LoginActivity : AppCompatActivity() {
     private fun loginUser(email: String, password: String){
 
         var incorrect = findViewById<TextView>(R.id.textView4)
-        println("gdgfdg")
         try {
             auth.signInWithEmailAndPassword(email,password).addOnSuccessListener {
+
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }.addOnFailureListener { incorrect.text="VERY WRONG" }
