@@ -11,13 +11,13 @@
         android:id="@+id/editPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
         android:layout_marginTop="28dp"
-        android:layout_marginEnd="145dp"
-        android:layout_marginRight="145dp"
         android:ems="10"
         android:inputType="textPassword"
         android:text="Password"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editEmail" />
 
     <TextView
@@ -28,6 +28,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
         android:text="Sign in"
+        android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,24 +36,24 @@
         android:id="@+id/editEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
         android:layout_marginTop="14dp"
-        android:layout_marginEnd="133dp"
-        android:layout_marginRight="133dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:text="Email"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="46dp"
         android:layout_marginRight="46dp"
         android:onClick="confirm"
-        android:text="Confirm"
+        android:text="Login"
         android:textColor="#000000"
         app:backgroundTint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,14 +63,25 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginRight="46dp"
         android:onClick="register"
         android:text="Register"
         android:textColor="#000000"
         app:backgroundTint="#FFFFFF"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="32dp"
+        android:textColor="#F44336"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editPassword" />
 
 

@@ -25,17 +25,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUser(email: String, password: String){
-        println(email)
-        println(password)
-        var a = findViewById<TextView>(R.id.textView)
+
+        var incorrect = findViewById<TextView>(R.id.textView4)
         try {
             auth.signInWithEmailAndPassword(email,password).addOnSuccessListener {
                 startActivity(Intent(this, MainActivity::class.java))
-            }.addOnFailureListener { a.text="VERY WRONG" }
+            }.addOnFailureListener { incorrect.text="VERY WRONG" }
 
         }
         catch (e: Exception){
-            a.text="WRONG"
+            incorrect.text="WRONG"
         }
     }
 

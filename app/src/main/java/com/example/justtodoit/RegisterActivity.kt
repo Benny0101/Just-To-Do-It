@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 
 class RegisterActivity : AppCompatActivity() {
@@ -27,9 +28,14 @@ class RegisterActivity : AppCompatActivity() {
                 startActivity(Intent(this,LoginActivity::class.java))
             }
             else {
-                println(task.exception?.message)
+                var invalid = findViewById<TextView>(R.id.textView3)
+                invalid.text="Invalid Account"
             }
         }
+    }
+
+    fun back(view: View) {
+        startActivity(Intent(this,LoginActivity::class.java))
     }
 
 
