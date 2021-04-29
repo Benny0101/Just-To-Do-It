@@ -32,6 +32,7 @@ class RegisterActivity : AppCompatActivity() {
                 database = FirebaseDatabase.getInstance()
                 myRef = database.getReference("users")
                 auth= FirebaseAuth.getInstance()
+                println(auth.currentUser.uid)
                 myRef.child(auth.currentUser.uid).setValue(arrayListOf(email,"user"))
                 startActivity(Intent(this,LoginActivity::class.java))
             }

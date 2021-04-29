@@ -11,5 +11,8 @@ Ben: Working out which database to use and how to add stuff to the database
 Useful information:
 
 Sometimes I have to run the app twice to sync code changes made (in case anyone else experiences this)
+
 Most/all users passwords are: qwerty
+
 When a user is created, currently the user is added to the realtime database with their uid as pk, along with their email and a random string(for now)
+

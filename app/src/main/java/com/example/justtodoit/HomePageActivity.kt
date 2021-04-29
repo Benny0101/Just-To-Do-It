@@ -1,5 +1,6 @@
 package com.example.justtodoit
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -8,17 +9,30 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 
-class MainActivity : AppCompatActivity() {
+class HomePageActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
     lateinit var database: FirebaseDatabase
     private lateinit var myRef: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_home)
 
     }
 
-    fun confirm2(view: View) {
 
+
+
+
+
+
+
+
+
+
+
+
+    fun settings(view: View) {
+        startActivity(Intent(this,SettingsActivity::class.java))
     }
+
 }
