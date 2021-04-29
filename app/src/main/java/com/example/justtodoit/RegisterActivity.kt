@@ -32,8 +32,9 @@ class RegisterActivity : AppCompatActivity() {
                 database = FirebaseDatabase.getInstance()
                 myRef = database.getReference("users")
                 auth= FirebaseAuth.getInstance()
-                println(auth.currentUser.uid)
-                myRef.child(auth.currentUser.uid).setValue(arrayListOf(email,"user"))
+                var type = "user"
+                var details = userDetails(email,type)
+                myRef.child(auth.currentUser.uid).setValue(details)
                 startActivity(Intent(this,LoginActivity::class.java))
             }
             else {
@@ -46,6 +47,13 @@ class RegisterActivity : AppCompatActivity() {
     fun back(view: View) {
         startActivity(Intent(this,LoginActivity::class.java))
         finish()
+    }
+
+    //sets columns names when added to realtime database
+    class userDetails(email: String, type: String) {
+        var email=email
+        var type=type
+
     }
 
 
