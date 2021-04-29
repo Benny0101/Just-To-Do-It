@@ -3,6 +3,7 @@ package com.example.justtodoit
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -33,6 +34,7 @@ class HomePageActivity : AppCompatActivity() {
 
     fun settings(view: View) {
         startActivity(Intent(this,SettingsActivity::class.java))
+        finish()
     }
 
 }

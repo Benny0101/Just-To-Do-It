@@ -6,4 +6,106 @@
     android:layout_height="match_parent"
     tools:context=".SettingsActivity">
 
+    <TextView
+        android:id="@+id/settingsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Just To Do It"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/homeButtonSet"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="80dp"
+        android:src="@drawable/home_icon_foreground"
+        app:backgroundTint="#FFFFFF"
+        android:onClick="home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addButtonSet"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/addButtonSet"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="80dp"
+        android:src="@drawable/add_icon_foreground"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/plusButtonSet"
+        app:layout_constraintStart_toEndOf="@+id/homeButtonSet" />
+
+    <ImageButton
+        android:id="@+id/settingsButtonSet"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="80dp"
+        android:src="@drawable/settings_icon_foreground"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/plusButtonSet" />
+
+    <Button
+        android:id="@+id/plusButtonSet"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="80dp"
+        android:text="Plus Membership"
+        android:textColor="#000000"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/settingsButtonSet"
+        app:layout_constraintStart_toEndOf="@+id/addButtonSet" />
+
+    <Button
+        android:id="@+id/notificationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:layout_marginTop="16dp"
+        android:text="Notifications"
+        android:textColor="#000000"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/themesButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsTitle" />
+
+    <Button
+        android:id="@+id/themesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Themes"
+        android:textColor="#000000"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/modesButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notificationButton" />
+
+    <Button
+        android:id="@+id/modesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Modes"
+        android:textColor="#000000"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/faqButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/themesButton" />
+
+    <Button
+        android:id="@+id/faqButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FAQ'S"
+        android:textColor="#000000"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modesButton" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
