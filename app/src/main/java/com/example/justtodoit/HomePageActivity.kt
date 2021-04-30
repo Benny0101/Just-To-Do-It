@@ -37,4 +37,9 @@ class HomePageActivity : AppCompatActivity() {
         finish()
     }
 
+    fun add(view: View) {
+        startActivity(Intent(this,AddTaskActivity::class.java))
+        finish()
+    }
+
 }

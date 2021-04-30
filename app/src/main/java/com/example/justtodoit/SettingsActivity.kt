@@ -16,4 +16,9 @@ class SettingsActivity : AppCompatActivity() {
         startActivity(Intent(this,HomePageActivity::class.java))
         finish()
     }
+
+    fun add(view: View) {
+        startActivity(Intent(this,AddTaskActivity::class.java))
+        finish()
+    }
 }

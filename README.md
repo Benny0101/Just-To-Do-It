@@ -3,6 +3,10 @@
 Write what you are currently working on here:
 
 Ben: Working out which database to use and how to add stuff to the database
+
+Ben: Added Drawable box and line files which can be used in the UI. Use them by adding a text view and setting the background
+src to drawable/'the item you want'.
+
 Michael: Google Authentication
 
 
