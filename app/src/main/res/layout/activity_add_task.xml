@@ -232,7 +232,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
         android:text="Task/Event Notes (Optional):"
         app:layout_constraintStart_toStartOf="@+id/box"
         app:layout_constraintTop_toBottomOf="@+id/radioButton" />
@@ -240,14 +240,15 @@
     <EditText
         android:id="@+id/taskDescr"
         android:layout_width="wrap_content"
-        android:layout_height="82dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:ems="10"
+        android:ems="14"
         android:inputType="textMultiLine"
+        android:maxLines="3"
         app:layout_constraintStart_toStartOf="@+id/box"
-        app:layout_constraintBottom_toTopOf="@id/taskDate"
-        app:layout_constraintTop_toBottomOf="@+id/taskNotes" />
+        app:layout_constraintTop_toBottomOf="@+id/taskNotes"
+        app:layout_constraintBottom_toTopOf=""/>
 
     <TextView
         android:id="@+id/type"
