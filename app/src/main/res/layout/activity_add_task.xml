@@ -22,9 +22,9 @@
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginBottom="80dp"
+        android:onClick="home"
         android:src="@drawable/home_icon_foreground"
         app:backgroundTint="#FFFFFF"
-        android:onClick="home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/addButtonAdd"
         app:layout_constraintStart_toStartOf="parent" />
@@ -45,9 +45,9 @@
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginBottom="80dp"
+        android:onClick="settings"
         android:src="@drawable/settings_icon_foreground"
         app:backgroundTint="#FFFFFF"
-        android:onClick="settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/plusButtonAdd" />
@@ -70,8 +70,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="4dp"
-        android:text="Create Task"
+        android:layout_marginTop="8dp"
+        android:text="Create Task or Event"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,23 +81,24 @@
         android:id="@+id/box"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/box"
         app:layout_constraintBottom_toTopOf="@+id/addButtonAdd"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/line"
         android:layout_width="0dp"
         android:layout_height="5dp"
-        android:layout_marginTop="2dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/line"
         app:layout_constraintBottom_toTopOf="@+id/textView5"
@@ -105,6 +106,170 @@
         app:layout_constraintHorizontal_bias="0.543"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AddTitle" />
+
+    <TextView
+        android:id="@+id/taskName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Task/Event Name:"
+        app:layout_constraintEnd_toStartOf="@id/editName"
+        app:layout_constraintStart_toStartOf="@+id/box"
+        app:layout_constraintTop_toTopOf="@+id/box" />
+
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/box"
+        app:layout_constraintStart_toEndOf="@+id/taskName"
+        app:layout_constraintTop_toTopOf="@+id/box" />
+
+    <TextView
+        android:id="@+id/taskDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="4dp"
+        android:text="Task Due Date\n/Event Date:"
+        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintStart_toStartOf="@+id/box"
+        app:layout_constraintTop_toBottomOf="@+id/taskDescr" />
+
+    <EditText
+        android:id="@+id/editDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:ems="2"
+        android:inputType="textPersonName"
+        android:maxLength="2"
+        android:text="DD"
+        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintStart_toEndOf="@+id/taskDate"
+        app:layout_constraintTop_toBottomOf="@+id/taskDescr" />
+
+    <EditText
+        android:id="@+id/editMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="3"
+        android:inputType="textPersonName"
+        android:maxLength="2"
+        android:text="MM"
+        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintStart_toEndOf="@+id/slash1"
+        app:layout_constraintTop_toBottomOf="@+id/taskDescr" />
+
+    <EditText
+        android:id="@+id/editYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="4"
+        android:inputType="textPersonName"
+        android:maxLength="4"
+        android:text="YYYY"
+        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintStart_toEndOf="@+id/slash2"
+        app:layout_constraintTop_toBottomOf="@+id/taskDescr" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="97dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:onClick="create"
+        android:text="Create"
+        android:textColor="#000000"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/box"
+        app:layout_constraintEnd_toEndOf="@+id/box"
+        app:layout_constraintStart_toEndOf="@+id/editMonth"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.75" />
+
+    <TextView
+        android:id="@+id/taskError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="4dp"
+        android:text=""
+        android:textColor="#2B2B2B"
+        app:layout_constraintBottom_toBottomOf="@+id/box"
+        app:layout_constraintStart_toStartOf="@+id/box" />
+
+    <TextView
+        android:id="@+id/slash1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:text="/"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintStart_toEndOf="@+id/editDay"
+        app:layout_constraintTop_toBottomOf="@+id/taskDescr" />
+
+    <TextView
+        android:id="@+id/slash2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintStart_toEndOf="@+id/editMonth"
+        app:layout_constraintTop_toBottomOf="@+id/taskDescr" />
+
+    <TextView
+        android:id="@+id/taskNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="8dp"
+        android:text="Task/Event Notes (Optional):"
+        app:layout_constraintStart_toStartOf="@+id/box"
+        app:layout_constraintTop_toBottomOf="@+id/radioButton" />
+
+    <EditText
+        android:id="@+id/taskDescr"
+        android:layout_width="wrap_content"
+        android:layout_height="82dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        app:layout_constraintStart_toStartOf="@+id/box"
+        app:layout_constraintBottom_toTopOf="@id/taskDate"
+        app:layout_constraintTop_toBottomOf="@+id/taskNotes" />
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="16dp"
+        android:text="Event Type?"
+        app:layout_constraintStart_toStartOf="@+id/box"
+        app:layout_constraintTop_toBottomOf="@+id/editName" />
+
+    <RadioButton
+        android:id="@+id/radioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:onClick="type"
+        android:text="Confirm"
+        app:layout_constraintStart_toEndOf="@+id/type"
+        app:layout_constraintTop_toBottomOf="@+id/editName" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
