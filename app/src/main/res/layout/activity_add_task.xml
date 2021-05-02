@@ -247,8 +247,7 @@
         android:inputType="textMultiLine"
         android:maxLines="3"
         app:layout_constraintStart_toStartOf="@+id/box"
-        app:layout_constraintTop_toBottomOf="@+id/taskNotes"
-        app:layout_constraintBottom_toTopOf=""/>
+        app:layout_constraintTop_toBottomOf="@+id/taskNotes" />
 
     <TextView
         android:id="@+id/type"
