@@ -21,48 +21,48 @@
         android:id="@+id/homeButtonAdd"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="80dp"
         android:onClick="home"
         android:src="@drawable/home_icon_foreground"
         app:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAd"
         app:layout_constraintEnd_toStartOf="@+id/addButtonAdd"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/box" />
 
     <ImageButton
         android:id="@+id/addButtonAdd"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="80dp"
         android:src="@drawable/add_icon_foreground"
         app:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAd"
         app:layout_constraintEnd_toStartOf="@+id/plusButtonAdd"
-        app:layout_constraintStart_toEndOf="@+id/homeButtonAdd" />
+        app:layout_constraintStart_toEndOf="@+id/homeButtonAdd"
+        app:layout_constraintTop_toBottomOf="@+id/box" />
 
     <ImageButton
         android:id="@+id/settingsButtonAdd"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="80dp"
         android:onClick="settings"
         android:src="@drawable/settings_icon_foreground"
         app:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAd"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/plusButtonAdd" />
+        app:layout_constraintStart_toEndOf="@+id/plusButtonAdd"
+        app:layout_constraintTop_toBottomOf="@+id/box"/>
 
     <Button
         android:id="@+id/plusButtonAdd"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="80dp"
         android:text="Plus Membership"
         android:textColor="#000000"
         app:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAd"
         app:layout_constraintEnd_toStartOf="@+id/settingsButtonAdd"
-        app:layout_constraintStart_toEndOf="@+id/addButtonAdd" />
+        app:layout_constraintStart_toEndOf="@+id/addButtonAdd"
+        app:layout_constraintTop_toBottomOf="@+id/box"/>
 
     <TextView
         android:id="@+id/textView5"
@@ -93,7 +93,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.49" />
 
     <TextView
         android:id="@+id/line"
@@ -134,7 +134,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginBottom="4dp"
-        android:text="Task Due Date\n/Event Date:"
+        android:text="Task Due Date/Event Date:"
         app:layout_constraintBottom_toTopOf="@+id/button5"
         app:layout_constraintStart_toStartOf="@+id/box"
         app:layout_constraintTop_toBottomOf="@+id/taskDescr" />
@@ -143,15 +143,15 @@
         android:id="@+id/editDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:ems="2"
         android:inputType="textPersonName"
         android:maxLength="2"
         android:text="DD"
         app:layout_constraintBottom_toTopOf="@+id/button5"
-        app:layout_constraintStart_toEndOf="@+id/taskDate"
-        app:layout_constraintTop_toBottomOf="@+id/taskDescr" />
+        app:layout_constraintStart_toStartOf="@+id/box"
+        app:layout_constraintTop_toBottomOf="@+id/taskDate" />
 
     <EditText
         android:id="@+id/editMonth"
@@ -163,7 +163,7 @@
         android:text="MM"
         app:layout_constraintBottom_toTopOf="@+id/button5"
         app:layout_constraintStart_toEndOf="@+id/slash1"
-        app:layout_constraintTop_toBottomOf="@+id/taskDescr" />
+        app:layout_constraintTop_toBottomOf="@+id/taskDate" />
 
     <EditText
         android:id="@+id/editYear"
@@ -175,7 +175,16 @@
         android:text="YYYY"
         app:layout_constraintBottom_toTopOf="@+id/button5"
         app:layout_constraintStart_toEndOf="@+id/slash2"
-        app:layout_constraintTop_toBottomOf="@+id/taskDescr" />
+        app:layout_constraintTop_toBottomOf="@+id/taskDate" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintEnd_toEndOf="@+id/box"
+        app:layout_constraintStart_toEndOf="@+id/editYear"
+        app:layout_constraintTop_toBottomOf="@+id/taskDate" />
 
     <Button
         android:id="@+id/button5"
@@ -207,14 +216,14 @@
 
     <TextView
         android:id="@+id/slash1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="8dp"
+        android:layout_height="23dp"
         android:layout_marginBottom="6dp"
         android:text="/"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/button5"
         app:layout_constraintStart_toEndOf="@+id/editDay"
-        app:layout_constraintTop_toBottomOf="@+id/taskDescr" />
+        app:layout_constraintTop_toBottomOf="@+id/taskDate" />
 
     <TextView
         android:id="@+id/slash2"
@@ -224,7 +233,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/button5"
         app:layout_constraintStart_toEndOf="@+id/editMonth"
-        app:layout_constraintTop_toBottomOf="@+id/taskDescr" />
+        app:layout_constraintTop_toBottomOf="@+id/taskDate" />
 
     <TextView
         android:id="@+id/taskNotes"
@@ -270,6 +279,16 @@
         android:text="Confirm"
         app:layout_constraintStart_toEndOf="@+id/type"
         app:layout_constraintTop_toBottomOf="@+id/editName" />
+
+    <TextView
+        android:id="@+id/textViewAd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Ad"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
