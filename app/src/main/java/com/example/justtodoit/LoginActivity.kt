@@ -15,6 +15,8 @@ import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import java.lang.Exception
 
 class LoginActivity : AppCompatActivity() {
@@ -24,6 +26,8 @@ class LoginActivity : AppCompatActivity() {
         private const val RC_SIGN_IN = 120
     }
     private lateinit var googleSignInClient: GoogleSignInClient
+    lateinit var database: FirebaseDatabase
+    private lateinit var myRef: DatabaseReference
 
     override fun onStart() {
         super.onStart()
@@ -95,6 +99,12 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("LoginActivity", "signInWithCredential:success")
+                    database = FirebaseDatabase.getInstance()
+                    myRef = database.getReference("users")
+                    auth= FirebaseAuth.getInstance()
+                    var type = "user"
+                    var details = RegisterActivity.userDetails(auth.currentUser.email, type)
+                    myRef.child(auth.currentUser.uid).setValue(details)
                     val intent = Intent(this, HomePageActivity::class.java)
                     startActivity(intent)
                     finish()
