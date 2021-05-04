@@ -13,7 +13,9 @@
         android:theme="@style/Theme.JustToDoIt">
         <activity android:name=".SettingsActivity"></activity>
         <activity android:name=".AddTaskActivity" />
+        <activity android:name=".MembershipActivity"/>
         <activity android:name=".LoginActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

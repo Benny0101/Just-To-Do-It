@@ -27,6 +27,11 @@ class SettingsActivity : AppCompatActivity() {
         finish()
     }
 
+    fun plus(view: View) {
+        startActivity(Intent(this, MembershipActivity::class.java))
+        finish()
+    }
+
     fun signOut(view: View) {
         auth.signOut()
         startActivity(Intent(this, LoginActivity::class.java))

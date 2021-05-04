@@ -34,6 +34,11 @@ class HomePageActivity : AppCompatActivity() {
         finish()
     }
 
+    fun plus(view: View) {
+        startActivity(Intent(this, MembershipActivity::class.java))
+        finish()
+    }
+
     fun confirm(view: View) {
         var date = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK).format(Date()).toString()
         var list = ArrayList<String>()
