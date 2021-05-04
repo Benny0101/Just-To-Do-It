@@ -17,6 +17,7 @@ import kotlin.collections.ArrayList
 
 
 class HomePageActivity : AppCompatActivity() {
+    var mode="today"
     lateinit var auth: FirebaseAuth
     private lateinit var myRef: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,10 +40,10 @@ class HomePageActivity : AppCompatActivity() {
         finish()
     }
 
-    fun confirm(view: View) {
+    fun today(view: View) {
+        mode="today"
         var date = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK).format(Date()).toString()
         var list = ArrayList<String>()
-        var list2 = ArrayList<String>()
         var adapter = CustAdapter(this, list)
         var listView = findViewById<ListView>(R.id.listView)
         listView.adapter = adapter
@@ -64,6 +65,10 @@ class HomePageActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    fun weekly(view: View) {
+        mode="weekly"
     }
 
     class CustAdapter : BaseAdapter{
@@ -89,7 +94,7 @@ class HomePageActivity : AppCompatActivity() {
             val inflater: LayoutInflater = context.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
             var conView = inflater.inflate(R.layout.activity_task, parent, false)
             var text2 = conView?.findViewById<TextView>(R.id.taskView2)
-            var button = conView.findViewById<Button>(R.id.taskButton)
+            var button = conView.findViewById<Button>(R.id.viewTaskButton)
             text2?.text = data[position]
             button.setOnClickListener {
                var  auth = FirebaseAuth.getInstance()
@@ -117,4 +122,5 @@ class HomePageActivity : AppCompatActivity() {
         }
 
     }
+
 }

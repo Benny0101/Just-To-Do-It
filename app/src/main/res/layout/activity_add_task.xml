@@ -139,42 +139,17 @@
         app:layout_constraintStart_toStartOf="@+id/box"
         app:layout_constraintTop_toBottomOf="@+id/taskDescr" />
 
-    <EditText
-        android:id="@+id/editDay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:ems="2"
-        android:inputType="textPersonName"
-        android:maxLength="2"
-        android:text="DD"
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="269dp"
+        android:layout_height="92dp"
+
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
         app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintEnd_toEndOf="@+id/box"
+        app:layout_constraintHorizontal_bias="0.237"
         app:layout_constraintStart_toStartOf="@+id/box"
-        app:layout_constraintTop_toBottomOf="@+id/taskDate" />
-
-    <EditText
-        android:id="@+id/editMonth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="3"
-        android:inputType="textPersonName"
-        android:maxLength="2"
-        android:text="MM"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
-        app:layout_constraintStart_toEndOf="@+id/slash1"
-        app:layout_constraintTop_toBottomOf="@+id/taskDate" />
-
-    <EditText
-        android:id="@+id/editYear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="4"
-        android:inputType="textPersonName"
-        android:maxLength="4"
-        android:text="YYYY"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
-        app:layout_constraintStart_toEndOf="@+id/slash2"
         app:layout_constraintTop_toBottomOf="@+id/taskDate" />
 
     <androidx.appcompat.widget.AppCompatSpinner
@@ -183,7 +158,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/button5"
         app:layout_constraintEnd_toEndOf="@+id/box"
-        app:layout_constraintStart_toEndOf="@+id/editYear"
+        app:layout_constraintStart_toEndOf="@+id/datePicker"
         app:layout_constraintTop_toBottomOf="@+id/taskDate" />
 
     <Button
@@ -198,7 +173,6 @@
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/box"
         app:layout_constraintEnd_toEndOf="@+id/box"
-        app:layout_constraintStart_toEndOf="@+id/editMonth"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.75" />
 
@@ -213,27 +187,6 @@
         android:textColor="#2B2B2B"
         app:layout_constraintBottom_toBottomOf="@+id/box"
         app:layout_constraintStart_toStartOf="@+id/box" />
-
-    <TextView
-        android:id="@+id/slash1"
-        android:layout_width="8dp"
-        android:layout_height="23dp"
-        android:layout_marginBottom="6dp"
-        android:text="/"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
-        app:layout_constraintStart_toEndOf="@+id/editDay"
-        app:layout_constraintTop_toBottomOf="@+id/taskDate" />
-
-    <TextView
-        android:id="@+id/slash2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="/"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
-        app:layout_constraintStart_toEndOf="@+id/editMonth"
-        app:layout_constraintTop_toBottomOf="@+id/taskDate" />
 
     <TextView
         android:id="@+id/taskNotes"

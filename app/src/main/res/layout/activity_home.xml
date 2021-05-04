@@ -111,7 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
-        android:onClick="confirm"
+        android:onClick="today"
         android:text="Todays Tasks"
         android:textColor="#000000"
         app:backgroundTint="#FFFFFF"
@@ -131,5 +131,18 @@
         app:layout_constraintStart_toStartOf="@+id/box2"
         app:layout_constraintTop_toBottomOf="@+id/button6"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:onClick="weekly"
+        android:text="Weekly"
+        android:textColor="#000000"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintStart_toEndOf="@+id/button6"
+        app:layout_constraintTop_toTopOf="@+id/box2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

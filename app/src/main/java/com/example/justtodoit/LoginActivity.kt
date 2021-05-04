@@ -117,20 +117,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     fun confirm(view: View){
         var email = findViewById<EditText>(R.id.editEmail)
         var password = findViewById<EditText>(R.id.editPassword)
