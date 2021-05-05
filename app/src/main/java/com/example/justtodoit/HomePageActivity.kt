@@ -65,9 +65,9 @@ class HomePageActivity : AppCompatActivity() {
                         }
                     }
                     else if (mode== "Week"){
-                        var a = date.parse(date_due)
+                        val selected = date.parse(date_due)
                         var cal = date.calendar.get(Calendar.WEEK_OF_YEAR)
-                        val b = date.parse(data.child("date_due").value.toString().substring(0, 10))
+                        val due = date.parse(data.child("date_due").value.toString().substring(0, 10))
                         var cal2 = date.calendar.get(Calendar.WEEK_OF_YEAR)
                         if (cal==cal2){
                             list.add(data.key.toString())
