@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import java.text.DateFormat
@@ -19,6 +20,7 @@ import kotlin.collections.ArrayList
 
 class HomePageActivity : AppCompatActivity() {
     var mode="Day"
+    var shown = "View Tasks & Events"
     lateinit var auth: FirebaseAuth
     private lateinit var myRef: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,18 +61,63 @@ class HomePageActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 list.clear()
                 for (data: DataSnapshot in snapshot.children) {
-                    if (mode == "Day") {
-                        if (data.child("date_due").value.toString().substring(0, 10) == date_due) {
-                            list.add(data.key.toString())
+                    if (shown == "View Tasks & Events") {
+                        if (mode == "Day") {
+                            if (data.child("date_due").value.toString().substring(0, 10) == date_due) {
+                                list.add(data.key.toString())
+                            }
+                        } else if (mode == "Week") {
+                            val selected = date.parse(date_due)
+                            var added = Calendar.getInstance()
+                            var current = Calendar.getInstance()
+                            current.time=selected
+                            added.time = selected
+                            added.add(Calendar.DAY_OF_YEAR,+7)
+                            current.add(Calendar.DAY_OF_YEAR,0)
+                            val due = date.parse(data.child("date_due").value.toString().substring(0, 10))
+                            if (due<=added.time && due>=current.time) {
+                                list.add(data.key.toString())
+                            }
                         }
                     }
-                    else if (mode== "Week"){
-                        val selected = date.parse(date_due)
-                        var cal = date.calendar.get(Calendar.WEEK_OF_YEAR)
-                        val due = date.parse(data.child("date_due").value.toString().substring(0, 10))
-                        var cal2 = date.calendar.get(Calendar.WEEK_OF_YEAR)
-                        if (cal==cal2){
-                            list.add(data.key.toString())
+                    else if (shown=="View Tasks"){
+                        if (mode == "Day") {
+                            if (data.child("date_due").value.toString().substring(0, 10) == date_due && data.child("type").value.toString()=="Task") {
+                                list.add(data.key.toString())
+                            }
+                        }
+                        else if (mode == "Week" && data.child("type").value.toString()=="Task") {
+                            val selected = date.parse(date_due)
+                            var added = Calendar.getInstance()
+                            var current = Calendar.getInstance()
+                            current.time=selected
+                            added.time = selected
+                            added.add(Calendar.DAY_OF_YEAR,+7)
+                            current.add(Calendar.DAY_OF_YEAR,0)
+                            val due = date.parse(data.child("date_due").value.toString().substring(0, 10))
+                            if (due<=added.time && due>=current.time) {
+                                list.add(data.key.toString())
+                            }
+                        }
+                    }
+                    else if (shown=="View Events"){
+                        if (mode == "Day") {
+                            if (data.child("date_due").value.toString().substring(0, 10) == date_due && data.child("type").value.toString()=="Event") {
+                                list.add(data.key.toString())
+                            }
+                        }
+                        else if (mode == "Week" && data.child("type").value.toString()=="Event") {
+                            val selected = date.parse(date_due)
+                            var added = Calendar.getInstance()
+                            var current = Calendar.getInstance()
+                            current.time=selected
+                            added.time = selected
+                            added.add(Calendar.DAY_OF_YEAR,+7)
+                            current.add(Calendar.DAY_OF_YEAR,0)
+                            val due = date.parse(data.child("date_due").value.toString().substring(0, 10))
+                            if (due<=added.time && due>=current.time) {
+                                list.add(data.key.toString())
+                            }
                         }
                     }
                 }
@@ -98,6 +145,31 @@ class HomePageActivity : AppCompatActivity() {
         finish()
     }
 
+    fun filter(view: View) {
+        var builder = AlertDialog.Builder(this)
+        builder.setCancelable(true)
+        builder.setTitle("Filter View:")
+        var input = EditText(this)
+        var spinner = Spinner(this)
+        var items = arrayOf("View Tasks & Events","View Tasks","View Events")
+        val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item,items)
+        spinner.adapter=spinnerAdapter
+        spinner.onItemSelectedListener=object: AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                shown = spinner.selectedItem.toString()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
+        var layoutParams = ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.MATCH_PARENT,ConstraintLayout.LayoutParams.MATCH_PARENT)
+        input.layoutParams = layoutParams
+        spinner.setSelection(items.indexOf(shown))
+        builder.setView(spinner)
+        builder.show()
+    }
+
 
     class CustAdapter : BaseAdapter{
         constructor(context: Context, data: ArrayList<String>){
@@ -123,11 +195,12 @@ class HomePageActivity : AppCompatActivity() {
             var conView = inflater.inflate(R.layout.activity_task, parent, false)
             var text2 = conView?.findViewById<TextView>(R.id.taskView2)
             var button = conView.findViewById<Button>(R.id.viewTaskButton)
+            var delete = conView.findViewById<ImageButton>(R.id.deleteTaskButton)
+            var  auth = FirebaseAuth.getInstance()
             text2?.text = data[position]
+            var  myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid).child(data[position])
             button.setOnClickListener {
-               var  auth = FirebaseAuth.getInstance()
                 var buffer = StringBuffer()
-                var  myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid).child(data[position])
                 myRef.addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         var builder = AlertDialog.Builder(context)
@@ -135,7 +208,7 @@ class HomePageActivity : AppCompatActivity() {
                             buffer.append("${data.key.toString()}: ${data.value.toString()}\n")
                         }
                         builder.setCancelable(true)
-                        builder.setTitle("Task Details")
+                        builder.setTitle("Task ${data[position]} Details:")
                         builder.setNegativeButton(R.string.back_string,null)
                         builder.setMessage(buffer.toString())
                         builder.show()
@@ -146,10 +219,20 @@ class HomePageActivity : AppCompatActivity() {
                     }
                 })
             }
+            delete.setOnClickListener {
+                var builder = AlertDialog.Builder(context)
+                var myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
+                myRef.child(data[position]).removeValue()
+                builder.setCancelable(true)
+                builder.setTitle("Task ${data[position]} Deleted")
+                builder.setNegativeButton(R.string.back_string,null)
+                builder.show()
+            }
             return conView
 
         }
 
     }
+
 
 }
