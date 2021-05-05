@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Just To Do It</string>
     <string name="confirm">Confirm</string>
+    <string name="back_string">Back</string>
 </resources>

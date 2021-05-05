@@ -12,17 +12,75 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 class HomePageActivity : AppCompatActivity() {
-    var mode="today"
+    var mode="Day"
     lateinit var auth: FirebaseAuth
     private lateinit var myRef: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        val spinner = findViewById<Spinner>(R.id.spinner2)
+        var items = arrayOf("Day","Week")
+        val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item,items)
+        spinner.adapter=spinnerAdapter
+        spinner.onItemSelectedListener=object: AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                mode = spinner.selectedItem.toString()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
+
+    }
+
+    fun confirm(view: View) {
+        var date = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK)
+        var date2 = date.format(Date()).toString()
+        var selectedDate = findViewById<DatePicker>(R.id.datePicker2)
+        var day = selectedDate.dayOfMonth.toString()
+        var month = (selectedDate.month+1).toString()
+        if (day.length == 1) day= "0$day"
+        if (month.length == 1) month = "0$month"
+        var date_due = "$day/$month/${selectedDate.year}"
+        var list = ArrayList<String>()
+        var adapter = CustAdapter(this, list)
+        var listView = findViewById<ListView>(R.id.listView)
+        listView.adapter = adapter
+        auth = FirebaseAuth.getInstance()
+        myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                list.clear()
+                for (data: DataSnapshot in snapshot.children) {
+                    if (mode == "Day") {
+                        if (data.child("date_due").value.toString().substring(0, 10) == date_due) {
+                            list.add(data.key.toString())
+                        }
+                    }
+                    else if (mode== "Week"){
+                        var a = date.parse(date_due)
+                        var cal = date.calendar.get(Calendar.WEEK_OF_YEAR)
+                        val b = date.parse(data.child("date_due").value.toString().substring(0, 10))
+                        var cal2 = date.calendar.get(Calendar.WEEK_OF_YEAR)
+                        if (cal==cal2){
+                            list.add(data.key.toString())
+                        }
+                    }
+                }
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
     }
 
     fun settings(view: View) {
@@ -40,36 +98,6 @@ class HomePageActivity : AppCompatActivity() {
         finish()
     }
 
-    fun today(view: View) {
-        mode="today"
-        var date = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK).format(Date()).toString()
-        var list = ArrayList<String>()
-        var adapter = CustAdapter(this, list)
-        var listView = findViewById<ListView>(R.id.listView)
-        listView.adapter = adapter
-        auth = FirebaseAuth.getInstance()
-        myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                list.clear()
-                for (data: DataSnapshot in snapshot.children) {
-                    if (data.child("date_due").value.toString().substring(0, 10) == date) {
-                        list.add(data.key.toString())
-                    }
-                }
-                adapter.notifyDataSetChanged()
-
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-            }
-
-        })
-    }
-
-    fun weekly(view: View) {
-        mode="weekly"
-    }
 
     class CustAdapter : BaseAdapter{
         constructor(context: Context, data: ArrayList<String>){
@@ -108,6 +136,7 @@ class HomePageActivity : AppCompatActivity() {
                         }
                         builder.setCancelable(true)
                         builder.setTitle("Task Details")
+                        builder.setNegativeButton(R.string.back_string,null)
                         builder.setMessage(buffer.toString())
                         builder.show()
                     }
@@ -115,7 +144,7 @@ class HomePageActivity : AppCompatActivity() {
 
                     override fun onCancelled(error: DatabaseError) {
                     }
-            })
+                })
             }
             return conView
 

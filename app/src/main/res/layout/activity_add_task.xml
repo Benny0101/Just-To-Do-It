@@ -86,7 +86,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/box"
         app:layout_constraintBottom_toTopOf="@+id/addButtonAdd"
         app:layout_constraintEnd_toEndOf="parent"
@@ -122,6 +121,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:maxLength="20"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/box"
         app:layout_constraintStart_toEndOf="@+id/taskName"
@@ -133,22 +133,23 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
-        android:layout_marginBottom="4dp"
         android:text="Task Due Date/Event Date:"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintBottom_toTopOf="@+id/datePicker"
         app:layout_constraintStart_toStartOf="@+id/box"
         app:layout_constraintTop_toBottomOf="@+id/taskDescr" />
 
     <DatePicker
         android:id="@+id/datePicker"
-        android:layout_width="269dp"
-        android:layout_height="92dp"
-
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
         android:calendarViewShown="false"
         android:datePickerMode="spinner"
         app:layout_constraintBottom_toTopOf="@+id/button5"
-        app:layout_constraintEnd_toEndOf="@+id/box"
-        app:layout_constraintHorizontal_bias="0.237"
+        app:layout_constraintEnd_toStartOf="@+id/spinner"
         app:layout_constraintStart_toStartOf="@+id/box"
         app:layout_constraintTop_toBottomOf="@+id/taskDate" />
 
@@ -156,6 +157,8 @@
         android:id="@+id/spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
         app:layout_constraintBottom_toTopOf="@+id/button5"
         app:layout_constraintEnd_toEndOf="@+id/box"
         app:layout_constraintStart_toEndOf="@+id/datePicker"
@@ -163,7 +166,7 @@
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="97dp"
+        android:layout_width="106dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
@@ -173,6 +176,7 @@
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/box"
         app:layout_constraintEnd_toEndOf="@+id/box"
+        app:layout_constraintTop_toBottomOf="@+id/datePicker"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.75" />
 
@@ -194,8 +198,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
-        android:layout_marginTop="6dp"
         android:text="Task/Event Notes (Optional):"
+        app:layout_constraintBottom_toTopOf="@id/taskDescr"
         app:layout_constraintStart_toStartOf="@+id/box"
         app:layout_constraintTop_toBottomOf="@+id/radioButton" />
 
@@ -208,6 +212,7 @@
         android:ems="14"
         android:inputType="textMultiLine"
         android:maxLines="3"
+        app:layout_constraintBottom_toTopOf="@id/datePicker"
         app:layout_constraintStart_toStartOf="@+id/box"
         app:layout_constraintTop_toBottomOf="@+id/taskNotes" />
 
