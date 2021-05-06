@@ -67,6 +67,9 @@ class AddTaskActivity : AppCompatActivity() {
                 var date_due2 = "$day/$month/${date2.year} $time"
                 var details = TaskDetails(descr, dateFormatter.format(Date()).toString(), date_due2, type)
                 myRef.child(auth.currentUser.uid).child(name2).setValue(details)
+                if (type=="Task"){
+                    myRef.child(auth.currentUser.uid).child(name2).child("status").setValue("Active")
+                }
                 error.text = "Task Added"
                 name.text.clear()
             }

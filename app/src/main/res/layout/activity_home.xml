@@ -114,6 +114,7 @@
         android:layout_marginLeft="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
+        android:layout_marginBottom="2dp"
         app:layout_constraintBottom_toBottomOf="@+id/box2"
         app:layout_constraintEnd_toEndOf="@+id/box2"
         app:layout_constraintHorizontal_bias="1.0"
