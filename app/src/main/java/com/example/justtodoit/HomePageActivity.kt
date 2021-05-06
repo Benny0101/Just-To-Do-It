@@ -222,12 +222,29 @@ class HomePageActivity : AppCompatActivity() {
             val inflater: LayoutInflater = context.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
             var conView = inflater.inflate(R.layout.activity_task, parent, false)
             var text2 = conView?.findViewById<TextView>(R.id.taskView2)
+            var text3 = conView?.findViewById<TextView>(R.id.taskView3)
             var viewButton = conView.findViewById<Button>(R.id.viewTaskButton)
             var edit = conView.findViewById<ImageButton>(R.id.editTaskButton)
             var delete = conView.findViewById<ImageButton>(R.id.deleteTaskButton)
             var  auth = FirebaseAuth.getInstance()
             text2?.text = data[position]
             var  myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid).child(data[position])
+            myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (data: DataSnapshot in snapshot.children) {
+                        if (data.key.toString()=="date_due") {
+                            text3?.text = "Scheduled: ${data.value.toString()}"
+                        }
+                        if (data.value.toString()=="Event"){
+                            viewButton.text="View Event"
+                        }
+                    }
+                }
+
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
             viewButton.setOnClickListener {
                 var buffer = StringBuffer()
                 var type="Event"
