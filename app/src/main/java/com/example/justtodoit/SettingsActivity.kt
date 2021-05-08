@@ -5,10 +5,29 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.GoogleApi
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.common.api.ResultCallback
+import com.google.android.gms.common.api.Status
 import com.google.firebase.auth.FirebaseAuth
 
 class SettingsActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
+
+    private lateinit var googleApiClient: GoogleApiClient
+
+    override fun onStart() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build()
+
+        googleApiClient = GoogleApiClient.Builder(this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build()
+        googleApiClient.connect()
+        super.onStart()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +53,9 @@ class SettingsActivity : AppCompatActivity() {
 
     fun signOut(view: View) {
         auth.signOut()
-        startActivity(Intent(this, LoginActivity::class.java))
-        finish()
+        Auth.GoogleSignInApi.signOut(googleApiClient)
+        val logoutIntent = Intent(this, LoginActivity::class.java)
+        startActivity(logoutIntent)
+
     }
 }
