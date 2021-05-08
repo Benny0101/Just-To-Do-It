@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.lang.Integer.parseInt
 import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 class AddTaskActivity : AppCompatActivity() {
@@ -64,9 +65,11 @@ class AddTaskActivity : AppCompatActivity() {
             if (day.length == 1) day= "0$day"
             if (month.length == 1) month = "0$month"
             if (name2!="") {
-                var date_due2 = "$day/$month/${date2.year} $time"
-                var details = TaskDetails(descr, dateFormatter.format(Date()).toString(), date_due2, type)
+                var date_due = "$day/$month/${date2.year} $time"
+                var details = TaskDetails(descr, dateFormatter.format(Date()).toString(), date_due, type)
                 myRef.child(auth.currentUser.uid).child(name2).setValue(details)
+                var timestamp= SimpleDateFormat("dd/mm/yyyy HH").parse(date_due)
+                myRef.child(auth.currentUser.uid).child(name2).child("date_due_timestamp").setValue(timestamp.time)
                 if (type=="Task"){
                     myRef.child(auth.currentUser.uid).child(name2).child("status").setValue("Active")
                 }

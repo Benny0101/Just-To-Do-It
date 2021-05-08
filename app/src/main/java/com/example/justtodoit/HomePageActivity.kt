@@ -3,7 +3,6 @@ package com.example.justtodoit
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,14 +13,18 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.Month
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 class HomePageActivity : AppCompatActivity() {
     var mode="Day"
-    var shown = "View Tasks & Events"
-    var status="Active"
+    var shown = "View All Tasks & Events"
     lateinit var auth: FirebaseAuth
     private lateinit var myRef: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,98 +59,139 @@ class HomePageActivity : AppCompatActivity() {
         var listView = findViewById<ListView>(R.id.listView)
         listView.adapter = adapter
         auth = FirebaseAuth.getInstance()
-        myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
-        myRef.orderByChild("date_due").addValueEventListener(object : ValueEventListener {
+        var myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
+        myRef.orderByChild("date_due_timestamp").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 list.clear()
                 val selected = date.parse(date_due)
                 for (data: DataSnapshot in snapshot.children) {
-                    if (shown == "View Tasks & Events") {
+                    if (shown == "View All Tasks & Events") {
                         if (mode == "Day") {
                             if (data.child("date_due").value.toString().substring(0, 10) == date_due) {
                                 list.add(data.key.toString())
                             }
                         } else if (mode == "Week") {
-                            var added = Calendar.getInstance()
-                            var current = Calendar.getInstance()
-                            current.time = selected
-                            added.time = selected
-                            added.add(Calendar.DAY_OF_YEAR, +7)
-                            current.add(Calendar.DAY_OF_YEAR, 0)
+                            var selectedTime = Calendar.getInstance()
+                            var itemTime = Calendar.getInstance()
+                            selectedTime.time = selected
+                            var selectedDate = selectedTime.get((Calendar.WEEK_OF_YEAR)+1)
                             val due = date.parse(data.child("date_due").value.toString().substring(0, 10))
-                            if (due <= added.time && due >= current.time) {
+                            itemTime.time = due
+                            var itemDate = itemTime.get((Calendar.WEEK_OF_YEAR)+1)
+                            if (selectedDate==itemDate) {
                                 list.add(data.key.toString())
                             }
                         } else if (mode == "Month") {
-                            var added = Calendar.getInstance()
-                            var current = Calendar.getInstance()
-                            current.time = selected
-                            added.time = selected
-                            added.add(Calendar.DAY_OF_YEAR, +31)
-                            current.add(Calendar.DAY_OF_YEAR, 0)
+                            var selectedTime = Calendar.getInstance()
+                            var itemTime = Calendar.getInstance()
+                            selectedTime.time = selected
+                            var selectedDate = selectedTime.get((Calendar.MONTH))
                             val due = date.parse(data.child("date_due").value.toString().substring(0, 10))
-                            if (due <= added.time && due >= current.time) {
+                            itemTime.time = due
+                            var itemDate = itemTime.get((Calendar.MONTH))
+                            if (selectedDate==itemDate) {
                                 list.add(data.key.toString())
                             }
                         }
-                    } else if (shown == "View Tasks") {
-                        if (mode == "Day") {
-                            if (data.child("date_due").value.toString().substring(0, 10) == date_due && data.child("type").value.toString() == "Task") {
-                                list.add(data.key.toString())
-                            }
-                        } else if (mode == "Week" && data.child("type").value.toString() == "Task") {
-                            var added = Calendar.getInstance()
-                            var current = Calendar.getInstance()
-                            current.time = selected
-                            added.time = selected
-                            added.add(Calendar.DAY_OF_YEAR, +7)
-                            current.add(Calendar.DAY_OF_YEAR, 0)
-                            val due = date.parse(data.child("date_due").value.toString().substring(0, 10))
-                            if (due <= added.time && due >= current.time) {
-                                list.add(data.key.toString())
-                            }
-                        } else if (mode == "Month" && data.child("type").value.toString() == "Task") {
-                            var added = Calendar.getInstance()
-                            var current = Calendar.getInstance()
-                            current.time = selected
-                            added.time = selected
-                            added.add(Calendar.DAY_OF_YEAR, +31)
-                            current.add(Calendar.DAY_OF_YEAR, 0)
-                            val due = date.parse(data.child("date_due").value.toString().substring(0, 10))
-                            if (due <= added.time && due >= current.time) {
-                                list.add(data.key.toString())
-                            }
-                        }
-                    } else if (shown == "View Events") {
+                    }  else if (shown == "View Events") {
                         if (mode == "Day") {
                             if (data.child("date_due").value.toString().substring(0, 10) == date_due && data.child("type").value.toString() == "Event") {
                                 list.add(data.key.toString())
                             }
                         } else if (mode == "Week" && data.child("type").value.toString() == "Event") {
-                            var added = Calendar.getInstance()
-                            var current = Calendar.getInstance()
-                            current.time = selected
-                            added.time = selected
-                            added.add(Calendar.DAY_OF_YEAR, +7)
-                            current.add(Calendar.DAY_OF_YEAR, 0)
+                            var selectedTime = Calendar.getInstance()
+                            var itemTime = Calendar.getInstance()
+                            selectedTime.time = selected
+                            var selectedDate = selectedTime.get((Calendar.WEEK_OF_YEAR)+1)
                             val due = date.parse(data.child("date_due").value.toString().substring(0, 10))
-                            if (due <= added.time && due >= current.time) {
+                            itemTime.time = due
+                            var itemDate = itemTime.get((Calendar.WEEK_OF_YEAR)+1)
+                            if (selectedDate==itemDate) {
                                 list.add(data.key.toString())
                             }
                         } else if (mode == "Month" && data.child("type").value.toString() == "Event") {
-                            var added = Calendar.getInstance()
-                            var current = Calendar.getInstance()
-                            current.time = selected
-                            added.time = selected
-                            added.add(Calendar.DAY_OF_YEAR, +31)
-                            current.add(Calendar.DAY_OF_YEAR, 0)
+                            var selectedTime = Calendar.getInstance()
+                            var itemTime = Calendar.getInstance()
+                            selectedTime.time = selected
+                            var selectedDate = selectedTime.get((Calendar.MONTH))
                             val due = date.parse(data.child("date_due").value.toString().substring(0, 10))
-                            if (due <= added.time && due >= current.time) {
+                            itemTime.time = due
+                            var itemDate = itemTime.get((Calendar.MONTH))
+                            if (selectedDate==itemDate) {
                                 list.add(data.key.toString())
                             }
                         }
                     }
+                    else if (shown == "View Active Tasks") {
+                        if (mode == "Day") {
+                            if (data.child("date_due").value.toString().substring(0, 10) == date_due && data.child("type").value.toString() == "Task") {
+                                if (data.child("status").value.toString()=="Active")
+                                    list.add(data.key.toString())
+                            }
+                        } else if (mode == "Week" && data.child("type").value.toString() == "Task") {
+                            if (data.child("status").value.toString()=="Active") {
+                                var selectedTime = Calendar.getInstance()
+                                var itemTime = Calendar.getInstance()
+                                selectedTime.time = selected
+                                var selectedDate = selectedTime.get((Calendar.WEEK_OF_YEAR) + 1)
+                                val due = date.parse(data.child("date_due").value.toString().substring(0, 10))
+                                itemTime.time = due
+                                var itemDate = itemTime.get((Calendar.WEEK_OF_YEAR) + 1)
+                                if (selectedDate == itemDate) {
+                                    list.add(data.key.toString())
+                                }
+                            }
+                        } else if (mode == "Month" && data.child("type").value.toString() == "Task") {
+                            if (data.child("status").value.toString() == "Active") {
+                                var selectedTime = Calendar.getInstance()
+                                var itemTime = Calendar.getInstance()
+                                selectedTime.time = selected
+                                var selectedDate = selectedTime.get((Calendar.MONTH))
+                                val due = date.parse(data.child("date_due").value.toString().substring(0, 10))
+                                itemTime.time = due
+                                var itemDate = itemTime.get((Calendar.MONTH))
+                                if (selectedDate == itemDate) {
+                                    list.add(data.key.toString())
+                                }
+                            }
+                        }
+                    }
+                    else if (shown == "View Done Tasks") {
+                        if (mode == "Day") {
+                            if (data.child("date_due").value.toString().substring(0, 10) == date_due && data.child("type").value.toString() == "Task") {
+                                if (data.child("status").value.toString()=="Done")
+                                    list.add(data.key.toString())
+                            }
+                        } else if (mode == "Week" && data.child("type").value.toString() == "Task") {
+                            if (data.child("status").value.toString()=="Done") {
+                                var selectedTime = Calendar.getInstance()
+                                var itemTime = Calendar.getInstance()
+                                selectedTime.time = selected
+                                var selectedDate = selectedTime.get((Calendar.WEEK_OF_YEAR) + 1)
+                                val due = date.parse(data.child("date_due").value.toString().substring(0, 10))
+                                itemTime.time = due
+                                var itemDate = itemTime.get((Calendar.WEEK_OF_YEAR) + 1)
+                                if (selectedDate == itemDate) {
+                                    list.add(data.key.toString())
+                                }
+                            }
+                        } else if (mode == "Month" && data.child("type").value.toString() == "Task") {
+                            if (data.child("status").value.toString() == "Done") {
+                                var selectedTime = Calendar.getInstance()
+                                var itemTime = Calendar.getInstance()
+                                selectedTime.time = selected
+                                var selectedDate = selectedTime.get((Calendar.MONTH))
+                                val due = date.parse(data.child("date_due").value.toString().substring(0, 10))
+                                itemTime.time = due
+                                var itemDate = itemTime.get((Calendar.MONTH))
+                                if (selectedDate == itemDate) {
+                                    list.add(data.key.toString())
+                                }
+                            }
+                        }
+                    }
                 }
+
 
                 adapter.notifyDataSetChanged()
             }
@@ -178,7 +222,7 @@ class HomePageActivity : AppCompatActivity() {
         builder.setTitle("Filter View:")
         var input = EditText(this)
         var spinner = Spinner(this)
-        var items = arrayOf("View Tasks & Events", "View Tasks", "View Events")
+        var items = arrayOf("View All Tasks & Events",  "View Events", "View Active Tasks", "View Done Tasks")
         val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, items)
         spinner.adapter=spinnerAdapter
         spinner.onItemSelectedListener=object: AdapterView.OnItemSelectedListener {
@@ -227,13 +271,14 @@ class HomePageActivity : AppCompatActivity() {
             var edit = conView.findViewById<ImageButton>(R.id.editTaskButton)
             var delete = conView.findViewById<ImageButton>(R.id.deleteTaskButton)
             var  auth = FirebaseAuth.getInstance()
-            text2?.text = data[position]
+            var name = data[position].substring(0,1).toUpperCase()+data[position].substring(1,data[position].length)
+            text2?.text = name
             var  myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid).child(data[position])
             myRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for (data: DataSnapshot in snapshot.children) {
                         if (data.key.toString()=="date_due") {
-                            text3?.text = "Scheduled: ${data.value.toString()}"
+                            text3?.text = "Due: ${data.value.toString()}"
                         }
                         if (data.value.toString()=="Event"){
                             viewButton.text="View Event"
@@ -247,24 +292,54 @@ class HomePageActivity : AppCompatActivity() {
             })
             viewButton.setOnClickListener {
                 var buffer = StringBuffer()
-                var type="Event"
+                var done=false
                 myRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         var checkbox = CheckBox(context)
                         var builder = AlertDialog.Builder(context)
                         for (data: DataSnapshot in snapshot.children) {
-                            buffer.append("${data.key.toString()}: ${data.value.toString()}\n")
+                            var key = data.key.toString()
+                            if (key=="date_due" || key=="date_set"){
+                                key=key.replace("_"," ")
+                            }
+                            var formatKey = key.substring(0,1).toUpperCase()+key.substring(1,key.length)
+                            if (data.key.toString()!="date_due_timestamp") {
+                                buffer.append("${formatKey}: ${data.value.toString()}\n\n")
+                            }
+                            if (data.value.toString()=="Done") done=true
+                            else if (data.value.toString()=="Active") done = false
                             if (data.value.toString() == "Task") {
-                                type="Task"
                                 var layoutParams = ConstraintLayout.LayoutParams(
                                         ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT)
                                 checkbox.layoutParams = layoutParams
-                                checkbox.text = "Task Complete"
+                                checkbox.text = "Task Complete?"
+                                if (done){
+                                    checkbox.text = "Task Incomplete?"
+                                }
                                 builder.setView(checkbox)
                             }
                         }
+                        checkbox.setOnClickListener {
+                            if (checkbox.isChecked){
+                                if (checkbox.text=="Task Complete?") {
+                                    myRef.child("status").setValue("Done")
+                                }
+                                else if (checkbox.text=="Task Incomplete?"){
+                                    myRef.child("status").setValue("Active")
+                                }
+                            }
+                            if (!checkbox.isChecked){
+                                if (checkbox.text=="Task Complete?") {
+                                    myRef.child("status").setValue("Active")
+                                }
+                                else if (checkbox.text=="Task Incomplete?"){
+                                    myRef.child("status").setValue("Done")
+                                }
+                            }
+                        }
                         builder.setCancelable(true)
-                        builder.setTitle("$type ${data[position]} Details:")
+                        var name = data[position].substring(0,1).toUpperCase()+data[position].substring(1,data[position].length)
+                        builder.setTitle("$name Details:\n")
                         builder.setNegativeButton(R.string.done_string, null)
                         builder.setMessage(buffer.toString())
                         builder.show()
@@ -275,29 +350,89 @@ class HomePageActivity : AppCompatActivity() {
                     }
                 })
             }
-            edit.setOnClickListener{
+            edit.setOnClickListener {
                 var editBuilder = AlertDialog.Builder(context)
-                var vieww = inflater.inflate(R.layout.activity_edit_task, parent, false)
-                editBuilder.setView(vieww)
+                var conView2 = inflater.inflate(R.layout.activity_edit_task, parent, false)
+                editBuilder.setView(conView2)
                 editBuilder.setCancelable(true)
                 editBuilder.setTitle("${data[position]} Edit:")
                 editBuilder.setNegativeButton(R.string.done_string, null)
                 editBuilder.setMessage("")
                 editBuilder.show()
-                var date = vieww.findViewById<DatePicker>(R.id.datePickerEdit)
-                var descr = vieww.findViewById<EditText>(R.id.editDescr)
-                var dateButton = vieww.findViewById<Button>(R.id.dateButton)
-                var descrButton = vieww.findViewById<Button>(R.id.descrButton)
-                dateButton.setOnClickListener{
+                var time ="0:00"
+                var date = conView2.findViewById<DatePicker>(R.id.datePickerEdit)
+                var descr = conView2.findViewById<EditText>(R.id.editDescr)
+                var name = conView2.findViewById<EditText>(R.id.editName)
+                var dateButton = conView2.findViewById<Button>(R.id.dateButton)
+                var descrButton = conView2.findViewById<Button>(R.id.descrButton)
+                var nameButton = conView2.findViewById<Button>(R.id.nameButton)
+                val spinner = conView2.findViewById<Spinner>(R.id.spinnerEdit)
+                var items = arrayOf("0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00",
+                        "12:00","1300","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00")
+                val adapter = ArrayAdapter(context, R.layout.support_simple_spinner_dropdown_item,items)
+                spinner.adapter=adapter
+                spinner.onItemSelectedListener=object: AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                        time = spinner.selectedItem.toString()
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                    }
+
+                }
+                var temp = data[position]
+                dateButton.setOnClickListener {
+                    var myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid).child(temp)
                     var day = date.dayOfMonth.toString()
-                    var month = (date.month+1).toString()
-                    if (day.length == 1) day= "0$day"
+                    var month = (date.month + 1).toString()
+                    if (day.length == 1) day = "0$day"
                     if (month.length == 1) month = "0$month"
-                    var date_due = "$day/$month/${date.year}"
+                    var date_due = "$day/$month/${date.year} $time"
                     myRef.child("date_due").setValue(date_due)
+                    var timestamp= SimpleDateFormat("dd/mm/yyyy HH").parse(date_due)
+                    myRef.child("date_due_timestamp").setValue(timestamp.time)
                 }
                 descrButton.setOnClickListener {
+                    var myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid).child(temp)
                     myRef.child("descr").setValue(descr.text.toString())
+                }
+                nameButton.setOnClickListener {
+                    var myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid).child(temp)
+                    var items = ArrayList<String>()
+                    var type=false
+                    myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            for (data: DataSnapshot in snapshot.children) {
+                                if (data.key.toString()!="date_due_timestamp") {
+                                    items.add(data.value.toString())
+                                }
+                                if (data.value.toString()=="Event"){
+                                    type=true
+                                }
+
+                            }
+                            var myRef2 = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
+                            myRef2.child(temp).removeValue()
+                            if (name.text.toString()!="") {
+                                if (!type) {
+                                    var details = TaskDetails(items[0], items[1], items[2], items[3], items[4])
+                                    myRef2.child(name.text.toString()).setValue(details)
+                                } else if (type) {
+                                    var details = EventDetails(items[0], items[1], items[2], items[3])
+                                    myRef2.child(name.text.toString()).setValue(details)
+                                }
+                                var timestamp= SimpleDateFormat("dd/mm/yyyy HH").parse(items[0])
+                                myRef2.child(name.text.toString()).child("date_due_timestamp").setValue(timestamp.time)
+                                temp = name.text.toString()
+
+                            }
+
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                        }
+
+                    })
                 }
             }
 
@@ -313,9 +448,27 @@ class HomePageActivity : AppCompatActivity() {
             return conView
 
         }
-
     }
 
+
+}
+
+class TaskDetails(s: String, s1: String, s2: String, s3: String, s4: String) {
+
+    var date_due = s
+    var date_set=s1
+    var descr = s2
+    var status=s3
+    var type=s4
+
+}
+
+class EventDetails(s: String, s1: String, s2: String, s3: String) {
+
+    var date_due = s
+    var date_set=s1
+    var descr = s2
+    var type=s3
 
 }
 
