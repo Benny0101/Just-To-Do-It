@@ -31,12 +31,9 @@ class AddTaskActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 time = spinner.selectedItem.toString()
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
-
         }
-
     }
 
     fun home(view: View) {

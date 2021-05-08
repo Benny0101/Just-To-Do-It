@@ -30,7 +30,6 @@ class HomePageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
         val spinner = findViewById<Spinner>(R.id.spinner2)
         var items = arrayOf("Day", "Week", "Month")
         val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, items)
@@ -39,11 +38,9 @@ class HomePageActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 mode = spinner.selectedItem.toString()
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
-
     }
 
     fun confirm(view: View) {
@@ -191,14 +188,11 @@ class HomePageActivity : AppCompatActivity() {
                         }
                     }
                 }
-
-
                 adapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {
             }
-
         })
     }
     fun settings(view: View) {
@@ -229,7 +223,6 @@ class HomePageActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 shown = spinner.selectedItem.toString()
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
@@ -285,11 +278,10 @@ class HomePageActivity : AppCompatActivity() {
                         }
                     }
                 }
-
-
                 override fun onCancelled(error: DatabaseError) {
                 }
             })
+
             viewButton.setOnClickListener {
                 var buffer = StringBuffer()
                 var done=false
@@ -344,20 +336,19 @@ class HomePageActivity : AppCompatActivity() {
                         builder.setMessage(buffer.toString())
                         builder.show()
                     }
-
-
                     override fun onCancelled(error: DatabaseError) {
                     }
                 })
             }
+
             edit.setOnClickListener {
                 var editBuilder = AlertDialog.Builder(context)
                 var conView2 = inflater.inflate(R.layout.activity_edit_task, parent, false)
                 editBuilder.setView(conView2)
                 editBuilder.setCancelable(true)
-                editBuilder.setTitle("${data[position]} Edit:")
+                var dataName = data[position].substring(0,1).toUpperCase()+data[position].substring(1,data[position].length)
+                editBuilder.setTitle("$dataName Edit:")
                 editBuilder.setNegativeButton(R.string.done_string, null)
-                editBuilder.setMessage("")
                 editBuilder.show()
                 var time ="0:00"
                 var date = conView2.findViewById<DatePicker>(R.id.datePickerEdit)
@@ -375,12 +366,11 @@ class HomePageActivity : AppCompatActivity() {
                     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                         time = spinner.selectedItem.toString()
                     }
-
                     override fun onNothingSelected(parent: AdapterView<*>?) {
                     }
-
                 }
                 var temp = data[position]
+
                 dateButton.setOnClickListener {
                     var myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid).child(temp)
                     var day = date.dayOfMonth.toString()
@@ -392,10 +382,12 @@ class HomePageActivity : AppCompatActivity() {
                     var timestamp= SimpleDateFormat("dd/mm/yyyy HH").parse(date_due)
                     myRef.child("date_due_timestamp").setValue(timestamp.time)
                 }
+
                 descrButton.setOnClickListener {
                     var myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid).child(temp)
                     myRef.child("descr").setValue(descr.text.toString())
                 }
+
                 nameButton.setOnClickListener {
                     var myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid).child(temp)
                     var items = ArrayList<String>()
@@ -409,7 +401,6 @@ class HomePageActivity : AppCompatActivity() {
                                 if (data.value.toString()=="Event"){
                                     type=true
                                 }
-
                             }
                             var myRef2 = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
                             myRef2.child(temp).removeValue()
@@ -426,7 +417,6 @@ class HomePageActivity : AppCompatActivity() {
                                 temp = name.text.toString()
 
                             }
-
                         }
 
                         override fun onCancelled(error: DatabaseError) {
@@ -446,29 +436,22 @@ class HomePageActivity : AppCompatActivity() {
                 builder.show()
             }
             return conView
-
         }
     }
-
-
 }
 
 class TaskDetails(s: String, s1: String, s2: String, s3: String, s4: String) {
-
     var date_due = s
     var date_set=s1
     var descr = s2
     var status=s3
     var type=s4
-
 }
 
 class EventDetails(s: String, s1: String, s2: String, s3: String) {
-
     var date_due = s
     var date_set=s1
     var descr = s2
     var type=s3
-
 }
 
