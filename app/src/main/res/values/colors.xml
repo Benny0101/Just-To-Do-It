@@ -9,9 +9,9 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Light theme -->
-    <color name="theme_pale">#F5F3F4</color>
+    <color name="theme_pale">#FFFFFFFF</color>
     <color name="theme_grey">#D3D3D3</color>
-    <color name="theme_grey_red">#B1A7A6</color>
+    <color name="theme_grey_red">#CCCCCC</color>
     <color name="theme_black_text">#FF000000</color>
 
     <!-- Dark theme -->

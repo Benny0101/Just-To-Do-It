@@ -32,6 +32,7 @@
         android:id="@+id/addButtonAdd"
         android:layout_width="0dp"
         android:layout_height="80dp"
+        android:onClick="add"
         android:src="@drawable/add_icon_foreground"
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/textViewAd"
@@ -57,6 +58,7 @@
         android:layout_height="80dp"
         android:text="Plus Membership"
         android:textColor="#000000"
+        android:onClick="plus"
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/textViewAd"
         app:layout_constraintEnd_toStartOf="@+id/settingsButtonAdd"
@@ -120,10 +122,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Select a theme"
+        android:layout_marginTop="12dp"
+        android:text="Select Theme"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/box"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toTopOf="@+id/box" />
 
     <TextView
         android:id="@+id/textView11"
@@ -131,7 +134,7 @@
         android:layout_height="22dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:text="Light"
         app:layout_constraintStart_toStartOf="@+id/box"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -142,10 +145,10 @@
         android:layout_height="22dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="28dp"
         android:text="Dark"
         app:layout_constraintStart_toStartOf="@+id/box"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <Button
         android:id="@+id/lightButton"
@@ -153,6 +156,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="12dp"
         android:onClick="lightTheme"
         android:text="Select"
         app:layout_constraintEnd_toEndOf="@+id/box"

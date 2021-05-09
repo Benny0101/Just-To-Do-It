@@ -119,7 +119,7 @@ class FAQSettingsActivity : AppCompatActivity() {
 
         if (!ques4Pressed){
             answer4.text="In the Add Task/Event screen, you can select the date of your task/event from the scrollable calendar."+
-                    " You can choose the due date for any day of that week and set the view type to weekly and select any date from that week to see it."
+                    " You can choose the due date for any day of the week due and set the view type to weekly and select any date from that week to see it."
             ques4Pressed=true
             ques1Pressed=false
             ques2Pressed=false
