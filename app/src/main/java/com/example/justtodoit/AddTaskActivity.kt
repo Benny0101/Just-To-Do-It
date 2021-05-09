@@ -1,5 +1,6 @@
 package com.example.justtodoit
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,6 +22,18 @@ class AddTaskActivity : AppCompatActivity() {
     var type = "Task"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Add this to every activity if you wish to have the theme apply
+        ThemeActivity.sharedPreferences = getSharedPreferences(
+                "ThemePref",
+                Context.MODE_PRIVATE
+        )
+
+        when (ThemeActivity.sharedPreferences.getString(ThemeActivity.themeKey, "light")) {
+            "light" -> theme.applyStyle(R.style.OverlayThemeLight, true)
+            "dark" -> theme.applyStyle(R.style.OverlayThemeDark, true)
+        }
+
         setContentView(R.layout.activity_add_task)
         val spinner = findViewById<Spinner>(R.id.spinner)
         var items = arrayOf("0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00",

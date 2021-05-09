@@ -81,6 +81,7 @@
         android:id="@+id/themesButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="theme"
         android:text="Themes"
         android:textColor="#000000"
         app:backgroundTint="#FFFFFF"

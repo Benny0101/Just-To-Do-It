@@ -1,5 +1,6 @@
 package com.example.justtodoit
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -31,6 +32,18 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Add this to every activity if you wish to have the theme apply
+        ThemeActivity.sharedPreferences = getSharedPreferences(
+                "ThemePref",
+                Context.MODE_PRIVATE
+        )
+
+        when (ThemeActivity.sharedPreferences.getString(ThemeActivity.themeKey, "light")) {
+            "light" -> theme.applyStyle(R.style.OverlayThemeLight, true)
+            "dark" -> theme.applyStyle(R.style.OverlayThemeDark, true)
+        }
+
         setContentView(R.layout.activity_settings)
 
         auth = FirebaseAuth.getInstance()
@@ -57,5 +70,10 @@ class SettingsActivity : AppCompatActivity() {
         val logoutIntent = Intent(this, LoginActivity::class.java)
         startActivity(logoutIntent)
 
+    }
+
+    fun theme(view: View) {
+        startActivity(Intent(this, ThemeActivity::class.java))
+        finish()
     }
 }

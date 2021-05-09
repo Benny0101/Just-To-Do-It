@@ -29,7 +29,21 @@ class HomePageActivity : AppCompatActivity() {
     private lateinit var myRef: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Add this to every activity if you wish to have the theme apply
+        ThemeActivity.sharedPreferences = getSharedPreferences(
+                "ThemePref",
+                Context.MODE_PRIVATE
+        )
+
+        when (ThemeActivity.sharedPreferences.getString(ThemeActivity.themeKey, "light")) {
+            "light" -> theme.applyStyle(R.style.OverlayThemeLight, true)
+            "dark" -> theme.applyStyle(R.style.OverlayThemeDark, true)
+        }
+
         setContentView(R.layout.activity_home)
+
+
         val spinner = findViewById<Spinner>(R.id.spinner2)
         var items = arrayOf("Day", "Week", "Month")
         val spinnerAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, items)

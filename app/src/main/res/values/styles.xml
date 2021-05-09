@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowBackground">@color/theme_pale</item> <!-- App Background -->
+        <item name="colorPrimary">@color/theme_grey_red</item> <!-- Main Background -->
+        <item name="colorPrimaryDark">@color/theme_grey</item>
+        <item name="colorAccent">@color/theme_grey_red</item> <!-- Action Bar -->
+        <item name="android:textColor">@color/theme_black_text</item> <!-- Text Colour -->
+    </style>
+
+    <style name="OverlayThemeLight" parent="AppTheme">
+        <item name="android:windowBackground">@color/theme_pale</item>
+        <item name="colorPrimary">@color/theme_grey_red</item>
+        <item name="colorPrimaryDark">@color/theme_grey</item>
+        <item name="colorAccent">@color/theme_grey_red</item>
+        <item name="android:textColor">@color/theme_black_text</item>
+    </style>
+
+    <style name="OverlayThemeDark" parent="AppTheme">
+        <item name="android:windowBackground">@color/theme_dark_black</item>
+        <item name="colorPrimary">@color/theme_dark</item>
+        <item name="colorPrimaryDark">@color/theme_dark_black</item>
+        <item name="colorAccent">@color/theme_black</item>
+        <item name="android:textColor">@color/theme_white_text</item>
+    </style>
+</resources>
