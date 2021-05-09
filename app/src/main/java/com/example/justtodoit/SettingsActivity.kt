@@ -76,4 +76,9 @@ class SettingsActivity : AppCompatActivity() {
         startActivity(Intent(this, ThemeActivity::class.java))
         finish()
     }
+
+    fun questions(view: View) {
+        startActivity(Intent(this, FAQSettingsActivity::class.java))
+        finish()
+    }
 }

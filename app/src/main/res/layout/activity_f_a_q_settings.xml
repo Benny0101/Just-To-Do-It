@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FAQSettingsActivity">
+
+    <TextView
+        android:id="@+id/AddTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Just To Do It"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/homeButtonAdd"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:onClick="home"
+        android:src="@drawable/home_icon_foreground"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAd"
+        app:layout_constraintEnd_toStartOf="@+id/addButtonAdd"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/addButtonAdd"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:src="@drawable/add_icon_foreground"
+        app:backgroundTint="#FFFFFF"
+        android:onClick="add"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAd"
+        app:layout_constraintEnd_toStartOf="@+id/plusButtonAdd"
+        app:layout_constraintStart_toEndOf="@+id/homeButtonAdd"
+        app:layout_constraintTop_toBottomOf="@+id/box" />
+
+    <ImageButton
+        android:id="@+id/settingsButtonAdd"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:src="@drawable/settings_icon_foreground"
+        app:backgroundTint="#FFFFFF"
+        android:onClick="settings"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/plusButtonAdd"
+        app:layout_constraintTop_toBottomOf="@+id/box"/>
+
+    <Button
+        android:id="@+id/plusButtonAdd"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:text="Plus Membership"
+        android:textColor="#000000"
+        android:onClick="plus"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAd"
+        app:layout_constraintEnd_toStartOf="@+id/settingsButtonAdd"
+        app:layout_constraintStart_toEndOf="@+id/addButtonAdd"
+        app:layout_constraintTop_toBottomOf="@+id/box"/>
+
+    <TextView
+        android:id="@+id/box"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/addButtonAdd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/line"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AddTitle" />
+
+    <TextView
+        android:id="@+id/textViewAd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Ad"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="FAQ's"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line" />
+
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="20dp"
+        android:text="How can I get in contact you?"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/box"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+
+    <ImageButton
+        android:id="@+id/expandIcon2"
+        android:layout_width="26dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/expand_icon_foreground"
+        android:onClick="expand2"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/box"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView12"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/expand2Text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginRight="6dp"
+        app:layout_constraintEnd_toEndOf="@+id/box"
+        app:layout_constraintStart_toStartOf="@+id/box"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="20dp"
+        android:text="How do I sign out?"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/box"
+        app:layout_constraintTop_toBottomOf="@+id/expand2Text" />
+
+
+    <ImageButton
+        android:id="@+id/expandIcon3"
+        android:layout_width="26dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/expand_icon_foreground"
+        android:onClick="expand3"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/box"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView13"
+        app:layout_constraintTop_toBottomOf="@+id/expand2Text" />
+
+    <TextView
+        android:id="@+id/expand3Text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginRight="6dp"
+        app:layout_constraintEnd_toEndOf="@+id/box"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/box"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="20dp"
+        android:text="How do I add a Task due next week?"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/box"
+        app:layout_constraintTop_toBottomOf="@+id/expand3Text" />
+
+
+    <ImageButton
+        android:id="@+id/expandIcon4"
+        android:layout_width="26dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/expand_icon_foreground"
+        android:onClick="expand4"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/box"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/expand3Text" />
+
+    <TextView
+        android:id="@+id/expand4Text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginRight="6dp"
+        app:layout_constraintEnd_toEndOf="@+id/box"
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toStartOf="@+id/box"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="4dp"
+        android:text="Back"
+        android:textColor="#000000"
+        app:backgroundTint="#FFFFFF"
+        android:onClick="back"
+        app:layout_constraintBottom_toBottomOf="@+id/box"
+        app:layout_constraintEnd_toEndOf="@+id/box" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
