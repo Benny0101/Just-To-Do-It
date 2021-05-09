@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "793870538741-9q0v0nu3g8ee6dk80l120n5b6v6512r1.apps.googleusercontent.com",
+          "client_id": "793870538741-6am2tli4bjjqmm355kat7emqi4es8n5c.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.justtodoit",
-            "certificate_hash": "7f02ace0fddcfaf0bd0cec44f05b306734cdd40c"
+            "certificate_hash": "e74504e01f2b60a8631d5162bf93f20e297e6255"
           }
         },
         {

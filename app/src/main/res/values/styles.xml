@@ -11,8 +11,8 @@
     <style name="OverlayThemeLight" parent="AppTheme">
         <item name="android:windowBackground">@color/theme_pale</item>
         <item name="colorPrimary">@color/theme_grey_red</item>
-        <item name="colorPrimaryDark">@color/theme_grey</item>
-        <item name="colorAccent">@color/theme_grey_red</item>
+        <item name="colorPrimaryDark">@color/theme_pale</item>
+        <item name="colorAccent">@color/theme_black_text</item>
         <item name="android:textColor">@color/theme_black_text</item>
     </style>
 
@@ -20,7 +20,15 @@
         <item name="android:windowBackground">@color/theme_dark_black</item>
         <item name="colorPrimary">@color/theme_dark</item>
         <item name="colorPrimaryDark">@color/theme_dark_black</item>
-        <item name="colorAccent">@color/theme_black</item>
+        <item name="colorAccent">@color/theme_white_text</item>
         <item name="android:textColor">@color/theme_white_text</item>
+    </style>
+
+    <style name="OverlayDefault" parent="AppTheme">
+        <item name="android:windowBackground">@color/white</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="android:textColor">@color/theme_black_text</item>
     </style>
 </resources>
