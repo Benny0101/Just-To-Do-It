@@ -117,17 +117,17 @@
     <EditText
         android:id="@+id/editName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:ems="10"
-        android:maxLength="20"
         android:inputType="textPersonName"
+        android:maxLength="20"
         app:layout_constraintEnd_toEndOf="@+id/box"
         app:layout_constraintStart_toEndOf="@+id/taskName"
         app:layout_constraintTop_toTopOf="@+id/box" />
 
     <TextView
         android:id="@+id/taskDate"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
@@ -146,6 +146,7 @@
         android:layout_marginRight="12dp"
         android:calendarViewShown="false"
         android:datePickerMode="spinner"
+        android:scrollbarSize="12dp"
         app:layout_constraintBottom_toTopOf="@+id/button5"
         app:layout_constraintEnd_toStartOf="@+id/spinner"
         app:layout_constraintStart_toStartOf="@+id/box"
@@ -204,13 +205,13 @@
     <EditText
         android:id="@+id/taskDescr"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:ems="14"
+        android:ems="15"
+        android:maxLength="200"
         android:inputType="textMultiLine"
-        android:maxLines="3"
-        app:layout_constraintBottom_toTopOf="@id/datePicker"
+        android:maxLines="2"
         app:layout_constraintStart_toStartOf="@+id/box"
         app:layout_constraintTop_toBottomOf="@+id/taskNotes" />
 
@@ -228,7 +229,7 @@
     <RadioButton
         android:id="@+id/radioButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:onClick="type"

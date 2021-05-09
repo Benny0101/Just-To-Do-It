@@ -26,15 +26,15 @@
 
     <EditText
         android:id="@+id/editDescr"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
-        android:ems="14"
+        android:ems="12"
         android:hint="Edit Description?"
         android:inputType="textMultiLine"
-        android:maxLines="3"
-        app:layout_constraintEnd_toStartOf="@+id/dateButton"
+        android:maxLength="200"
+        android:maxLines="2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateButton" />
 
