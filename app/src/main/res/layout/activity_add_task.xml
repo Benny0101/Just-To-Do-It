@@ -121,7 +121,7 @@
         android:layout_height="0dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:maxLength="20"
+        android:maxLength="25"
         app:layout_constraintEnd_toEndOf="@+id/box"
         app:layout_constraintStart_toEndOf="@+id/taskName"
         app:layout_constraintTop_toTopOf="@+id/box" />
