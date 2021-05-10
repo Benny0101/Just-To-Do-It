@@ -32,8 +32,8 @@
 
     <ImageButton
         android:id="@+id/editTaskButton"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginTop="12dp"
         android:src="@drawable/edit_icon_foreground"
         android:text="Delete"
@@ -45,8 +45,8 @@
 
     <ImageButton
         android:id="@+id/deleteTaskButton"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginTop="12dp"
         android:src="@drawable/delete_icon_foreground"
         android:text="Delete"

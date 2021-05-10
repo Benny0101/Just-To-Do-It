@@ -26,6 +26,7 @@ class HomePageActivity : AppCompatActivity() {
     var mode="Day"
     var shown = "View All Tasks & Events"
     lateinit var auth: FirebaseAuth
+    var valid = false
     private lateinit var myRef: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +80,7 @@ class HomePageActivity : AppCompatActivity() {
                     if (shown == "View All Tasks & Events") {
                         if (mode == "Day") {
                             if (data.child("date_due").value.toString().substring(0, 10) == date_due) {
+                                valid=true
                                 list.add(data.key.toString())
                             }
                         } else if (mode == "Week") {
@@ -90,6 +92,7 @@ class HomePageActivity : AppCompatActivity() {
                             itemTime.time = due
                             var itemDate = itemTime.get((Calendar.WEEK_OF_YEAR)+1)
                             if (selectedDate==itemDate) {
+                                valid=true
                                 list.add(data.key.toString())
                             }
                         } else if (mode == "Month") {
@@ -101,12 +104,14 @@ class HomePageActivity : AppCompatActivity() {
                             itemTime.time = due
                             var itemDate = itemTime.get((Calendar.MONTH))
                             if (selectedDate==itemDate) {
+                                valid=true
                                 list.add(data.key.toString())
                             }
                         }
                     }  else if (shown == "View Events") {
                         if (mode == "Day") {
                             if (data.child("date_due").value.toString().substring(0, 10) == date_due && data.child("type").value.toString() == "Event") {
+                                valid=true
                                 list.add(data.key.toString())
                             }
                         } else if (mode == "Week" && data.child("type").value.toString() == "Event") {
@@ -118,6 +123,7 @@ class HomePageActivity : AppCompatActivity() {
                             itemTime.time = due
                             var itemDate = itemTime.get((Calendar.WEEK_OF_YEAR)+1)
                             if (selectedDate==itemDate) {
+                                valid=true
                                 list.add(data.key.toString())
                             }
                         } else if (mode == "Month" && data.child("type").value.toString() == "Event") {
@@ -129,6 +135,7 @@ class HomePageActivity : AppCompatActivity() {
                             itemTime.time = due
                             var itemDate = itemTime.get((Calendar.MONTH))
                             if (selectedDate==itemDate) {
+                                valid=true
                                 list.add(data.key.toString())
                             }
                         }
@@ -136,8 +143,10 @@ class HomePageActivity : AppCompatActivity() {
                     else if (shown == "View Active Tasks") {
                         if (mode == "Day") {
                             if (data.child("date_due").value.toString().substring(0, 10) == date_due && data.child("type").value.toString() == "Task") {
-                                if (data.child("status").value.toString()=="Active")
+                                if (data.child("status").value.toString()=="Active") {
+                                    valid = true
                                     list.add(data.key.toString())
+                                }
                             }
                         } else if (mode == "Week" && data.child("type").value.toString() == "Task") {
                             if (data.child("status").value.toString()=="Active") {
@@ -150,6 +159,7 @@ class HomePageActivity : AppCompatActivity() {
                                 var itemDate = itemTime.get((Calendar.WEEK_OF_YEAR) + 1)
                                 if (selectedDate == itemDate) {
                                     list.add(data.key.toString())
+                                    valid=true
                                 }
                             }
                         } else if (mode == "Month" && data.child("type").value.toString() == "Task") {
@@ -162,6 +172,7 @@ class HomePageActivity : AppCompatActivity() {
                                 itemTime.time = due
                                 var itemDate = itemTime.get((Calendar.MONTH))
                                 if (selectedDate == itemDate) {
+                                    valid=true
                                     list.add(data.key.toString())
                                 }
                             }
@@ -170,8 +181,10 @@ class HomePageActivity : AppCompatActivity() {
                     else if (shown == "View Done Tasks") {
                         if (mode == "Day") {
                             if (data.child("date_due").value.toString().substring(0, 10) == date_due && data.child("type").value.toString() == "Task") {
-                                if (data.child("status").value.toString()=="Done")
+                                if (data.child("status").value.toString()=="Done") {
+                                    valid = true
                                     list.add(data.key.toString())
+                                }
                             }
                         } else if (mode == "Week" && data.child("type").value.toString() == "Task") {
                             if (data.child("status").value.toString()=="Done") {
@@ -184,6 +197,7 @@ class HomePageActivity : AppCompatActivity() {
                                 var itemDate = itemTime.get((Calendar.WEEK_OF_YEAR) + 1)
                                 if (selectedDate == itemDate) {
                                     list.add(data.key.toString())
+                                    valid=true
                                 }
                             }
                         } else if (mode == "Month" && data.child("type").value.toString() == "Task") {
@@ -197,18 +211,35 @@ class HomePageActivity : AppCompatActivity() {
                                 var itemDate = itemTime.get((Calendar.MONTH))
                                 if (selectedDate == itemDate) {
                                     list.add(data.key.toString())
+                                    valid=true
                                 }
                             }
                         }
                     }
                 }
+                invalid()
                 adapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {
             }
+
         })
+
+
     }
+
+    private fun invalid() {
+        if (!valid) {
+            var builder = AlertDialog.Builder(this)
+            builder.setTitle("No Tasks/Events Available")
+            builder.setNegativeButton(R.string.done_string, null)
+            builder.show()
+        }
+        else if (valid)
+            valid=false
+    }
+
     fun settings(view: View) {
         startActivity(Intent(this, SettingsActivity::class.java))
         finish()
