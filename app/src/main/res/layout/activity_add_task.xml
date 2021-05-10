@@ -57,6 +57,7 @@
         android:layout_height="80dp"
         android:text="Plus Membership"
         android:textColor="#000000"
+        android:onClick="plus"
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/textViewAd"
         app:layout_constraintEnd_toStartOf="@+id/settingsButtonAdd"
