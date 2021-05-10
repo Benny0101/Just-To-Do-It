@@ -36,12 +36,6 @@ class LoginActivity : AppCompatActivity() {
         /**Checks if a google user is signed in*/
         //auth.signOut()
 
-        sharedPreferences = getSharedPreferences(
-                "ThemePref",
-                Context.MODE_PRIVATE
-        )
-        sharedPreferences.edit().putString(ThemeActivity.themeKey, "light").apply()
-
         val user = auth.currentUser
         if (user != null) {
             startActivity(Intent(this, HomePageActivity::class.java))

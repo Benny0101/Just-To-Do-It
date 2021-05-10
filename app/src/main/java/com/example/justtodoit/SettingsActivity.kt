@@ -41,7 +41,7 @@ class SettingsActivity : AppCompatActivity() {
 
         when (ThemeActivity.sharedPreferences.getString(ThemeActivity.themeKey, "light")) {
             "light" -> theme.applyStyle(R.style.OverlayThemeLight, true)
-            "dark" -> theme.applyStyle(R.style.OverlayThemeDark, true)
+            "pastel" -> theme.applyStyle(R.style.OverlayThemePastel, true)
         }
 
         setContentView(R.layout.activity_settings)

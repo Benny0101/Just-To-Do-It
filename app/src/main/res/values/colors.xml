@@ -19,4 +19,10 @@
     <color name="theme_dark_black">#191714</color>
     <color name="theme_black">#000000</color>
     <color name="theme_white_text">#FFFFFFFF</color>
+
+    <!-- Pastel theme -->
+    <color name="theme_dark_pastel">#CFD7C7</color>
+    <color name="theme_pastel">#F6F1D1</color>
+    <color name="theme_dark_text">#343330</color>
+    <color name="theme_pastel_action">#40798C</color>
 </resources>

@@ -25,7 +25,7 @@ class ThemeActivity : AppCompatActivity() {
 
         when (sharedPreferences.getString(themeKey, "light")) {
             "light" -> theme.applyStyle(R.style.OverlayThemeLight, true)
-            "dark" -> theme.applyStyle(R.style.OverlayThemeDark, true)
+            "pastel" -> theme.applyStyle(R.style.OverlayThemePastel, true)
         }
 
         setContentView(R.layout.activity_theme)
@@ -39,8 +39,8 @@ class ThemeActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun darkTheme(view: View) {
-        sharedPreferences.edit().putString(themeKey, "dark").apply()
+    fun pastelTheme(view: View) {
+        sharedPreferences.edit().putString(themeKey, "pastel").apply()
         val intent = intent
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         finish()

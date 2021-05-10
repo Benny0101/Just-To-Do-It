@@ -24,6 +24,14 @@
         <item name="android:textColor">@color/theme_white_text</item>
     </style>
 
+    <style name="OverlayThemePastel" parent="AppTheme">
+        <item name="android:windowBackground">@color/theme_pastel</item>
+        <item name="colorPrimary">@color/theme_dark_pastel</item>
+        <item name="colorPrimaryDark">@color/theme_dark_black</item>
+        <item name="colorAccent">@color/theme_pastel_action</item>
+        <item name="android:textColor">@color/theme_dark_text</item>
+    </style>
+
     <style name="OverlayDefault" parent="AppTheme">
         <item name="android:windowBackground">@color/white</item>
         <item name="colorPrimary">@color/white</item>
