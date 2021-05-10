@@ -32,6 +32,22 @@
         <item name="android:textColor">@color/theme_dark_text</item>
     </style>
 
+    <style name="OverlayThemeBlue" parent="AppTheme">
+        <item name="android:windowBackground">@color/theme_blue</item>
+        <item name="colorPrimary">@color/theme_dark_blue</item>
+        <item name="colorPrimaryDark">@color/theme_dark_black</item>
+        <item name="colorAccent">@color/theme_blue_action</item>
+        <item name="android:textColor">@color/theme_dark_text</item>
+    </style>
+
+    <style name="OverlayThemeRed" parent="AppTheme">
+        <item name="android:windowBackground">@color/theme_red</item>
+        <item name="colorPrimary">@color/theme_dark_red</item>
+        <item name="colorPrimaryDark">@color/theme_dark_black</item>
+        <item name="colorAccent">@color/theme_blue_action</item>
+        <item name="android:textColor">@color/theme_dark_text</item>
+    </style>
+
     <style name="OverlayDefault" parent="AppTheme">
         <item name="android:windowBackground">@color/white</item>
         <item name="colorPrimary">@color/white</item>

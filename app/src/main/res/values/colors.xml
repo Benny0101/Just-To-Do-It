@@ -25,4 +25,17 @@
     <color name="theme_pastel">#F6F1D1</color>
     <color name="theme_dark_text">#343330</color>
     <color name="theme_pastel_action">#40798C</color>
+
+    <!-- Blue theme -->
+    <color name="theme_dark_blue">#4477b2</color>
+    <color name="theme_blue">#6591c4</color>
+    <color name="theme_blue_text">#343330</color>
+    <color name="theme_blue_action">#40798C</color>
+
+    <!-- Red theme -->
+    <color name="theme_dark_red">#FF6D6A</color>
+    <color name="theme_red">#ff9e99</color>
+    <color name="theme_red_text">#343330</color>
+    <color name="theme_red_action">#ff6961</color>
+
 </resources>

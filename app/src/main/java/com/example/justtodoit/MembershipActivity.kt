@@ -2,6 +2,7 @@ package com.example.justtodoit
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,12 @@ import com.google.firebase.database.DatabaseReference
 class MembershipActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
     private lateinit var myRef: DatabaseReference
+
+    companion object {
+        lateinit var sharedPreferences: SharedPreferences
+        val themeKey = "currentTheme"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -23,9 +30,27 @@ class MembershipActivity : AppCompatActivity() {
         when (ThemeActivity.sharedPreferences.getString(ThemeActivity.themeKey, "light")) {
             "light" -> theme.applyStyle(R.style.OverlayThemeLight, true)
             "pastel" -> theme.applyStyle(R.style.OverlayThemePastel, true)
+            "blue" -> theme.applyStyle(R.style.OverlayThemeBlue, true)
+            "red" -> theme.applyStyle(R.style.OverlayThemeRed, true)
         }
 
         setContentView(R.layout.activity_membership)
+    }
+
+    fun blueTheme(view: View) {
+        ThemeActivity.sharedPreferences.edit().putString(ThemeActivity.themeKey, "blue").apply()
+        val intent = intent
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        finish()
+        startActivity(intent)
+    }
+
+    fun redTheme(view: View) {
+        ThemeActivity.sharedPreferences.edit().putString(ThemeActivity.themeKey, "red").apply()
+        val intent = intent
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        finish()
+        startActivity(intent)
     }
 
 
@@ -41,12 +66,6 @@ class MembershipActivity : AppCompatActivity() {
 
     fun settings(view: View) {
         startActivity(Intent(this, SettingsActivity::class.java))
-        finish()
-    }
-
-
-    fun plusThemes(view: View) {
-        startActivity(Intent(this, MembershipThemesActivity::class.java))
         finish()
     }
 

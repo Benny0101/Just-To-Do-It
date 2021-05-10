@@ -8,7 +8,7 @@
     tools:context=".MembershipActivity">
 
     <TextView
-        android:id="@+id/membershipTitle"
+        android:id="@+id/plusTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Just To Do It"
@@ -22,11 +22,10 @@
         android:id="@+id/homeButtonSet"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="80dp"
+        android:onClick="home"
         android:src="@drawable/home_icon_foreground"
         app:backgroundTint="#FFFFFF"
-        android:onClick="home"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/plusAd"
         app:layout_constraintEnd_toStartOf="@+id/addButtonSet"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -34,11 +33,10 @@
         android:id="@+id/addButtonSet"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="80dp"
-        android:src="@drawable/add_icon_foreground"
         android:onClick="add"
+        android:src="@drawable/add_icon_foreground"
         app:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/plusAd"
         app:layout_constraintEnd_toStartOf="@+id/plusButtonSet"
         app:layout_constraintStart_toEndOf="@+id/homeButtonSet" />
 
@@ -46,11 +44,10 @@
         android:id="@+id/settingsButtonSet"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="80dp"
         android:src="@drawable/settings_icon_foreground"
         android:onClick="settings"
         app:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/plusAd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/plusButtonSet" />
 
@@ -58,44 +55,151 @@
         android:id="@+id/plusButtonSet"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="80dp"
         android:text="Plus Membership"
         android:textColor="#000000"
         app:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/plusAd"
         app:layout_constraintEnd_toStartOf="@+id/settingsButtonSet"
         app:layout_constraintStart_toEndOf="@+id/addButtonSet" />
 
-    <Button
-        android:id="@+id/button6"
+
+    <TextView
+        android:id="@+id/box2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="8dp"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/box6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Extra Themes"
-        android:textColor="#000000"
-        android:onClick="plusThemes"
-        app:backgroundTint="#FFFFFF"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="12dp"
+        android:text="Plus Themes"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/box2"
+        app:layout_constraintTop_toTopOf="@+id/box2" />
+
+    <TextView
+        android:id="@+id/box6"
+        android:layout_width="0dp"
+        android:layout_height="254dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/addButtonSet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="12dp"
+        android:text="Plus Notifications"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/box6"
+        app:layout_constraintTop_toTopOf="@+id/box6" />
+
+    <TextView
+        android:id="@+id/line2"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/line"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/membershipTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/plusTitle" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Plus Membership Settings"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+    <TextView
+        android:id="@+id/plusAd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Ad"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="72dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Blue"
+        app:layout_constraintStart_toStartOf="@+id/box2"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="72dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="28dp"
+        android:text="Red"
+        app:layout_constraintStart_toStartOf="@+id/box2"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <Button
         android:id="@+id/button7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="More Notifications"
-        android:textColor="#000000"
-        app:backgroundTint="#FFFFFF"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button6" />
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="12dp"
+        android:onClick="blueTheme"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="@+id/box2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <Button
         android:id="@+id/button8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:onClick="redTheme"
         android:text="Button"
-        android:textColor="#000000"
-        app:backgroundTint="#FFFFFF"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/box2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView18"
         app:layout_constraintTop_toBottomOf="@+id/button7" />
 
 

@@ -24,6 +24,8 @@ class FAQSettingsActivity : AppCompatActivity() {
         when (ThemeActivity.sharedPreferences.getString(ThemeActivity.themeKey, "light")) {
             "light" -> theme.applyStyle(R.style.OverlayThemeLight, true)
             "pastel" -> theme.applyStyle(R.style.OverlayThemePastel, true)
+            "blue" -> theme.applyStyle(R.style.OverlayThemeBlue, true)
+            "red" -> theme.applyStyle(R.style.OverlayThemeRed, true)
         }
 
         setContentView(R.layout.activity_f_a_q_settings)
