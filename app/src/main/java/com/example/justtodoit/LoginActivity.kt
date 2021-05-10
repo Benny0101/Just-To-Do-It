@@ -136,7 +136,7 @@ class LoginActivity : AppCompatActivity() {
 
         }
         catch (e: Exception){
-            incorrect.text="Enter Username & Password"
+            incorrect.text="Enter Email & Password"
         }
     }
 
