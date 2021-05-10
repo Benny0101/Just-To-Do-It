@@ -23,6 +23,9 @@ import kotlin.collections.HashMap
 
 
 class HomePageActivity : AppCompatActivity() {
+    companion object{
+        var valid=false
+    }
     var mode="Day"
     var shown = "View All Tasks & Events"
     lateinit var auth: FirebaseAuth
@@ -79,6 +82,7 @@ class HomePageActivity : AppCompatActivity() {
                     if (shown == "View All Tasks & Events") {
                         if (mode == "Day") {
                             if (data.child("date_due").value.toString().substring(0, 10) == date_due) {
+                                valid=true
                                 list.add(data.key.toString())
                             }
                         } else if (mode == "Week") {
@@ -90,6 +94,7 @@ class HomePageActivity : AppCompatActivity() {
                             itemTime.time = due
                             var itemDate = itemTime.get((Calendar.WEEK_OF_YEAR)+1)
                             if (selectedDate==itemDate) {
+                                valid=true
                                 list.add(data.key.toString())
                             }
                         } else if (mode == "Month") {
@@ -101,12 +106,14 @@ class HomePageActivity : AppCompatActivity() {
                             itemTime.time = due
                             var itemDate = itemTime.get((Calendar.MONTH))
                             if (selectedDate==itemDate) {
+                                valid=true
                                 list.add(data.key.toString())
                             }
                         }
                     }  else if (shown == "View Events") {
                         if (mode == "Day") {
                             if (data.child("date_due").value.toString().substring(0, 10) == date_due && data.child("type").value.toString() == "Event") {
+                                valid=true
                                 list.add(data.key.toString())
                             }
                         } else if (mode == "Week" && data.child("type").value.toString() == "Event") {
@@ -118,6 +125,7 @@ class HomePageActivity : AppCompatActivity() {
                             itemTime.time = due
                             var itemDate = itemTime.get((Calendar.WEEK_OF_YEAR)+1)
                             if (selectedDate==itemDate) {
+                                valid=true
                                 list.add(data.key.toString())
                             }
                         } else if (mode == "Month" && data.child("type").value.toString() == "Event") {
@@ -129,6 +137,7 @@ class HomePageActivity : AppCompatActivity() {
                             itemTime.time = due
                             var itemDate = itemTime.get((Calendar.MONTH))
                             if (selectedDate==itemDate) {
+                                valid=true
                                 list.add(data.key.toString())
                             }
                         }
@@ -136,8 +145,10 @@ class HomePageActivity : AppCompatActivity() {
                     else if (shown == "View Active Tasks") {
                         if (mode == "Day") {
                             if (data.child("date_due").value.toString().substring(0, 10) == date_due && data.child("type").value.toString() == "Task") {
-                                if (data.child("status").value.toString()=="Active")
+                                if (data.child("status").value.toString()=="Active") {
+                                    valid = true
                                     list.add(data.key.toString())
+                                }
                             }
                         } else if (mode == "Week" && data.child("type").value.toString() == "Task") {
                             if (data.child("status").value.toString()=="Active") {
@@ -150,6 +161,7 @@ class HomePageActivity : AppCompatActivity() {
                                 var itemDate = itemTime.get((Calendar.WEEK_OF_YEAR) + 1)
                                 if (selectedDate == itemDate) {
                                     list.add(data.key.toString())
+                                    valid=true
                                 }
                             }
                         } else if (mode == "Month" && data.child("type").value.toString() == "Task") {
@@ -162,6 +174,7 @@ class HomePageActivity : AppCompatActivity() {
                                 itemTime.time = due
                                 var itemDate = itemTime.get((Calendar.MONTH))
                                 if (selectedDate == itemDate) {
+                                    valid=true
                                     list.add(data.key.toString())
                                 }
                             }
@@ -170,8 +183,10 @@ class HomePageActivity : AppCompatActivity() {
                     else if (shown == "View Done Tasks") {
                         if (mode == "Day") {
                             if (data.child("date_due").value.toString().substring(0, 10) == date_due && data.child("type").value.toString() == "Task") {
-                                if (data.child("status").value.toString()=="Done")
+                                if (data.child("status").value.toString()=="Done") {
+                                    valid = true
                                     list.add(data.key.toString())
+                                }
                             }
                         } else if (mode == "Week" && data.child("type").value.toString() == "Task") {
                             if (data.child("status").value.toString()=="Done") {
@@ -184,6 +199,7 @@ class HomePageActivity : AppCompatActivity() {
                                 var itemDate = itemTime.get((Calendar.WEEK_OF_YEAR) + 1)
                                 if (selectedDate == itemDate) {
                                     list.add(data.key.toString())
+                                    valid=true
                                 }
                             }
                         } else if (mode == "Month" && data.child("type").value.toString() == "Task") {
@@ -197,18 +213,35 @@ class HomePageActivity : AppCompatActivity() {
                                 var itemDate = itemTime.get((Calendar.MONTH))
                                 if (selectedDate == itemDate) {
                                     list.add(data.key.toString())
+                                    valid=true
                                 }
                             }
                         }
                     }
                 }
                 adapter.notifyDataSetChanged()
+                invalid()
             }
 
             override fun onCancelled(error: DatabaseError) {
             }
+
         })
+
+
     }
+
+    private fun invalid() {
+        if (!valid) {
+            var builder = AlertDialog.Builder(this)
+            builder.setTitle("No Tasks/Events Available")
+            builder.setNegativeButton(R.string.done_string, null)
+            builder.show()
+        }
+        else if (valid)
+            valid=false
+    }
+
     fun settings(view: View) {
         startActivity(Intent(this, SettingsActivity::class.java))
         finish()
@@ -416,9 +449,10 @@ class HomePageActivity : AppCompatActivity() {
                                     type=true
                                 }
                             }
-                            var myRef2 = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
-                            myRef2.child(temp).removeValue()
-                            if (name.text.toString()!="") {
+                            if (name.text.toString()!="" && temp!=name.text.toString()){
+                                HomePageActivity.valid=true
+                                var myRef2 = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
+                                myRef2.child(temp).removeValue()
                                 if (!type) {
                                     var details = TaskDetails(items[0], items[1], items[2], items[3], items[4])
                                     myRef2.child(name.text.toString()).setValue(details)
