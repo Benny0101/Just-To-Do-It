@@ -132,11 +132,11 @@ class LoginActivity : AppCompatActivity() {
 
                 startActivity(Intent(this, HomePageActivity::class.java))
                 finish()
-            }.addOnFailureListener { incorrect.text="VERY WRONG" }
+            }.addOnFailureListener { incorrect.text="Invalid Credentials" }
 
         }
         catch (e: Exception){
-            incorrect.text="WRONG"
+            incorrect.text="Enter Username & Password"
         }
     }
 
