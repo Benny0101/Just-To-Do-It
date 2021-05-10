@@ -27,6 +27,8 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun register(email: String, password: String) {
+        var invalid = findViewById<TextView>(R.id.textView3)
+        try{
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener {task->
             if (task.isSuccessful){
                 database = FirebaseDatabase.getInstance()
@@ -38,9 +40,12 @@ class RegisterActivity : AppCompatActivity() {
                 startActivity(Intent(this,LoginActivity::class.java))
             }
             else {
-                var invalid = findViewById<TextView>(R.id.textView3)
                 invalid.text="Invalid Account"
             }
+            }
+        }
+        catch (e: Exception){
+            invalid.text="Enter Email and Password"
         }
     }
 

@@ -21,11 +21,10 @@
         android:id="@+id/homeButtonSet"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="80dp"
+        android:onClick="home"
         android:src="@drawable/home_icon_foreground"
         app:backgroundTint="#FFFFFF"
-        android:onClick="home"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/settingsAd"
         app:layout_constraintEnd_toStartOf="@+id/addButtonSet"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -33,11 +32,10 @@
         android:id="@+id/addButtonSet"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="80dp"
-        android:src="@drawable/add_icon_foreground"
         android:onClick="add"
+        android:src="@drawable/add_icon_foreground"
         app:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/settingsAd"
         app:layout_constraintEnd_toStartOf="@+id/plusButtonSet"
         app:layout_constraintStart_toEndOf="@+id/homeButtonSet" />
 
@@ -45,10 +43,9 @@
         android:id="@+id/settingsButtonSet"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="80dp"
         android:src="@drawable/settings_icon_foreground"
         app:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/settingsAd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/plusButtonSet" />
 
@@ -56,26 +53,67 @@
         android:id="@+id/plusButtonSet"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="80dp"
         android:onClick="plus"
         android:text="Plus Membership"
         android:textColor="#000000"
         app:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/settingsAd"
         app:layout_constraintEnd_toStartOf="@+id/settingsButtonSet"
         app:layout_constraintStart_toEndOf="@+id/addButtonSet" />
+
+
+    <TextView
+        android:id="@+id/box2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/addButtonSet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/line2"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/line"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsTitle" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Settings"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line2" />
 
     <Button
         android:id="@+id/notificationButton"
         android:layout_width="wrap_content"
         android:layout_height="46dp"
-        android:layout_marginTop="16dp"
         android:text="Notifications"
         android:textColor="#000000"
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/themesButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsTitle" />
+        app:layout_constraintStart_toStartOf="@+id/box2"
+        app:layout_constraintTop_toTopOf="@+id/box2" />
 
     <Button
         android:id="@+id/themesButton"
@@ -85,31 +123,19 @@
         android:text="Themes"
         android:textColor="#000000"
         app:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/modesButton"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/box2"
         app:layout_constraintTop_toBottomOf="@+id/notificationButton" />
-
-    <Button
-        android:id="@+id/modesButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Modes"
-        android:textColor="#000000"
-        app:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/faqButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/themesButton" />
 
     <Button
         android:id="@+id/faqButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FAQ'S"
         android:onClick="questions"
+        android:text="FAQ'S"
         android:textColor="#000000"
         app:backgroundTint="#FFFFFF"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/modesButton" />
+        app:layout_constraintStart_toStartOf="@+id/box2"
+        app:layout_constraintTop_toBottomOf="@+id/themesButton" />
 
     <Button
         android:id="@+id/signOut"
@@ -119,8 +145,18 @@
         android:text="Sign Out"
         android:textColor="#000000"
         app:backgroundTint="#FFFFFF"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/box2"
         app:layout_constraintTop_toBottomOf="@+id/faqButton" />
+
+    <TextView
+        android:id="@+id/settingsAd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Ad"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

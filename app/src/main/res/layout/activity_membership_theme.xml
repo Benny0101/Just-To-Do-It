@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddTaskActivity">
+    tools:context=".ThemeActivity">
 
     <TextView
         android:id="@+id/AddTitle"
@@ -32,6 +32,7 @@
         android:id="@+id/addButtonAdd"
         android:layout_width="0dp"
         android:layout_height="80dp"
+        android:onClick="add"
         android:src="@drawable/add_icon_foreground"
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/textViewAd"
@@ -71,7 +72,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:text="Create Task or Event"
+        android:text="Extra Themes"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,140 +107,6 @@
         app:layout_constraintTop_toBottomOf="@+id/AddTitle" />
 
     <TextView
-        android:id="@+id/taskName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Task/Event Name:"
-        app:layout_constraintEnd_toStartOf="@id/editName"
-        app:layout_constraintStart_toStartOf="@+id/box"
-        app:layout_constraintTop_toTopOf="@+id/box" />
-
-    <EditText
-        android:id="@+id/editName"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:maxLength="20"
-        app:layout_constraintEnd_toEndOf="@+id/box"
-        app:layout_constraintStart_toEndOf="@+id/taskName"
-        app:layout_constraintTop_toTopOf="@+id/box" />
-
-    <TextView
-        android:id="@+id/taskDate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:text="Task Due Date/Event Date:"
-        app:layout_constraintBottom_toTopOf="@+id/datePicker"
-        app:layout_constraintStart_toStartOf="@+id/box"
-        app:layout_constraintTop_toBottomOf="@+id/taskDescr" />
-
-    <DatePicker
-        android:id="@+id/datePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginRight="12dp"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner"
-        android:scrollbarSize="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
-        app:layout_constraintEnd_toStartOf="@+id/spinner"
-        app:layout_constraintStart_toStartOf="@+id/box"
-        app:layout_constraintTop_toBottomOf="@+id/taskDate" />
-
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:layout_marginRight="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
-        app:layout_constraintEnd_toEndOf="@+id/box"
-        app:layout_constraintStart_toEndOf="@+id/datePicker"
-        app:layout_constraintTop_toBottomOf="@+id/taskDate" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="106dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
-        android:onClick="create"
-        android:text="Create"
-        android:textColor="#000000"
-        app:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/box"
-        app:layout_constraintEnd_toEndOf="@+id/box"
-        app:layout_constraintTop_toBottomOf="@+id/datePicker"
-        app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.75" />
-
-    <TextView
-        android:id="@+id/taskError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="4dp"
-        android:text=""
-        android:textColor="#2B2B2B"
-        app:layout_constraintBottom_toBottomOf="@+id/box"
-        app:layout_constraintStart_toStartOf="@+id/box" />
-
-    <TextView
-        android:id="@+id/taskNotes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="6dp"
-        android:text="Task/Event Notes (Optional):"
-        app:layout_constraintBottom_toTopOf="@id/taskDescr"
-        app:layout_constraintStart_toStartOf="@+id/box"
-        app:layout_constraintTop_toBottomOf="@+id/radioButton" />
-
-    <EditText
-        android:id="@+id/taskDescr"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:ems="15"
-        android:maxLength="200"
-        android:inputType="textMultiLine"
-        android:maxLines="2"
-        app:layout_constraintStart_toStartOf="@+id/box"
-        app:layout_constraintTop_toBottomOf="@+id/taskNotes" />
-
-    <TextView
-        android:id="@+id/type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="6dp"
-        android:text="Event Type?"
-        app:layout_constraintStart_toStartOf="@+id/box"
-        app:layout_constraintTop_toBottomOf="@+id/editName" />
-
-    <RadioButton
-        android:id="@+id/radioButton"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:onClick="type"
-        android:text="Confirm"
-        app:layout_constraintStart_toEndOf="@+id/type"
-        app:layout_constraintTop_toBottomOf="@+id/editName" />
-
-    <TextView
         android:id="@+id/textViewAd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -248,6 +115,100 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="12dp"
+        android:text="Select Theme"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/box"
+        app:layout_constraintTop_toTopOf="@+id/box" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="72dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:text="example 1"
+        app:layout_constraintStart_toStartOf="@+id/box"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="72dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="28dp"
+        android:text="example 2"
+        app:layout_constraintStart_toStartOf="@+id/box"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="72dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="28dp"
+        android:text="example 3"
+        app:layout_constraintStart_toStartOf="@+id/box"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <Button
+        android:id="@+id/exampleButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="12dp"
+        android:text="Select"
+        app:layout_constraintEnd_toEndOf="@+id/box"
+        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <Button
+        android:id="@+id/exampleButton2"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="Select"
+        app:layout_constraintEnd_toEndOf="@+id/box"
+        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintStart_toEndOf="@+id/textView12"
+        app:layout_constraintTop_toBottomOf="@+id/exampleButton1" />
+
+    <Button
+        android:id="@+id/exampleButton3"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="Select"
+        app:layout_constraintEnd_toEndOf="@+id/box"
+        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintStart_toEndOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/exampleButton2" />
+
+    <Button
+        android:id="@+id/confirmButton"
+        android:layout_width="119dp"
+        android:layout_height="54dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="confirm"
+        android:text="Confirm"
+        app:layout_constraintBottom_toBottomOf="@+id/box"
+        app:layout_constraintEnd_toEndOf="@+id/box" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
