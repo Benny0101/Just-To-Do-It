@@ -185,7 +185,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
         android:onClick="confirm"
-        android:text="Confirm"
+        android:text="Back"
         app:layout_constraintBottom_toBottomOf="@+id/box"
         app:layout_constraintEnd_toEndOf="@+id/box" />
 
