@@ -54,6 +54,11 @@ class AddTaskActivity : AppCompatActivity() {
         finish()
     }
 
+    fun plus(view: View) {
+        startActivity(Intent(this, MembershipActivity::class.java))
+        finish()
+    }
+
     fun settings(view: View) {
         startActivity(Intent(this, SettingsActivity::class.java))
         finish()

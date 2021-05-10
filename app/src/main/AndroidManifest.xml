@@ -15,6 +15,7 @@
         <activity android:name=".SettingsActivity" />
         <activity android:name=".AddTaskActivity" />
         <activity android:name=".MembershipActivity" />
+        <activity android:name=".MembershipThemesActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

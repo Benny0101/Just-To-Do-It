@@ -39,8 +39,14 @@ class MembershipActivity : AppCompatActivity() {
         finish()
     }
 
-    fun plus(view: View) {
-        startActivity(Intent(this, MembershipActivity::class.java))
+    fun settings(view: View) {
+        startActivity(Intent(this, SettingsActivity::class.java))
+        finish()
+    }
+
+
+    fun plusThemes(view: View) {
+        startActivity(Intent(this, MembershipThemesActivity::class.java))
         finish()
     }
 
