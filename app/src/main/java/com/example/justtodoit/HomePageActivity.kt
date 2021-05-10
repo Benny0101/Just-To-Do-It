@@ -23,10 +23,12 @@ import kotlin.collections.HashMap
 
 
 class HomePageActivity : AppCompatActivity() {
+    companion object{
+        var valid=false
+    }
     var mode="Day"
     var shown = "View All Tasks & Events"
     lateinit var auth: FirebaseAuth
-    var valid = false
     private lateinit var myRef: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -217,8 +219,8 @@ class HomePageActivity : AppCompatActivity() {
                         }
                     }
                 }
-                invalid()
                 adapter.notifyDataSetChanged()
+                invalid()
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -447,9 +449,10 @@ class HomePageActivity : AppCompatActivity() {
                                     type=true
                                 }
                             }
-                            var myRef2 = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
-                            myRef2.child(temp).removeValue()
-                            if (name.text.toString()!="") {
+                            if (name.text.toString()!="" && temp!=name.text.toString()){
+                                HomePageActivity.valid=true
+                                var myRef2 = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
+                                myRef2.child(temp).removeValue()
                                 if (!type) {
                                     var details = TaskDetails(items[0], items[1], items[2], items[3], items[4])
                                     myRef2.child(name.text.toString()).setValue(details)

@@ -175,7 +175,7 @@
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toEndOf="@+id/datePicker2"
         app:layout_constraintTop_toBottomOf="@+id/searchButton"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintVertical_bias="0.52" />
 
     <Button
         android:id="@+id/searchButton"
@@ -203,6 +203,15 @@
         app:layout_constraintBottom_toTopOf="@+id/box2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/listView"
+        app:layout_constraintEnd_toEndOf="@+id/box2"
+        app:layout_constraintStart_toEndOf="@+id/datePicker2"
+        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
