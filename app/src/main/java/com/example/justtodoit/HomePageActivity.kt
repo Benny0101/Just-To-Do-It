@@ -224,13 +224,10 @@ class HomePageActivity : AppCompatActivity() {
                 adapter.notifyDataSetChanged()
                 invalid()
             }
-
             override fun onCancelled(error: DatabaseError) {
             }
 
         })
-
-
     }
 
     private fun invalid() {
@@ -422,6 +419,7 @@ class HomePageActivity : AppCompatActivity() {
                     }
                 }
                 var temp = data[position]
+                var builder2 = AlertDialog.Builder(context)
 
                 dateButton.setOnClickListener {
                     var myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid).child(temp)
@@ -433,11 +431,19 @@ class HomePageActivity : AppCompatActivity() {
                     myRef.child("date_due").setValue(date_due)
                     var timestamp= SimpleDateFormat("dd/mm/yyyy HH").parse(date_due)
                     myRef.child("date_due_timestamp").setValue(timestamp.time)
+                    builder2.setCancelable(true)
+                    builder2.setTitle("$temp Date Edited")
+                    builder2.setNegativeButton(R.string.done_string, null)
+                    builder2.show()
                 }
 
                 descrButton.setOnClickListener {
                     var myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid).child(temp)
                     myRef.child("descr").setValue(descr.text.toString())
+                    builder2.setCancelable(true)
+                    builder2.setTitle("$temp Description Edited")
+                    builder2.setNegativeButton(R.string.done_string, null)
+                    builder2.show()
                 }
 
                 nameButton.setOnClickListener {
@@ -468,7 +474,10 @@ class HomePageActivity : AppCompatActivity() {
                                 var timestamp= SimpleDateFormat("dd/mm/yyyy HH").parse(items[0])
                                 myRef2.child(name.text.toString()).child("date_due_timestamp").setValue(timestamp.time)
                                 temp = name.text.toString()
-
+                                builder2.setCancelable(true)
+                                builder2.setTitle("New Name: $temp ")
+                                builder2.setNegativeButton(R.string.done_string, null)
+                                builder2.show()
                             }
                         }
 
@@ -477,6 +486,7 @@ class HomePageActivity : AppCompatActivity() {
 
                     })
                 }
+
             }
 
             delete.setOnClickListener {

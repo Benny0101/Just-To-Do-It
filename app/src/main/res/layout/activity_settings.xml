@@ -133,7 +133,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="questions"
-        android:text="FAQ'S"
+        android:text="FAQS"
         android:textColor="#000000"
         app:backgroundTint="#FFFFFF"
         app:layout_constraintStart_toStartOf="@+id/box2"

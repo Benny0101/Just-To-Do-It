@@ -77,6 +77,8 @@ class AddTaskActivity : AppCompatActivity() {
         var name2 = findViewById<EditText>(R.id.editName).text.toString()
         var dateFormatter = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK)
         try {
+            var duplicate =myRef.child(auth.currentUser.uid).child(name2)
+            println(duplicate)
             var day = date2.dayOfMonth.toString()
             var month = (date2.month+1).toString()
             if (day.length == 1) day= "0$day"
@@ -89,17 +91,20 @@ class AddTaskActivity : AppCompatActivity() {
                 myRef.child(auth.currentUser.uid).child(name2).child("date_due_timestamp").setValue(timestamp.time)
                 if (type=="Task"){
                     myRef.child(auth.currentUser.uid).child(name2).child("status").setValue("Active")
+                    //Not an error in this case
+                    error.text = "Task Added"
                 }
-                error.text = "Task Added"
+                if (type=="Event"){
+                    //Not an error in this case
+                    error.text = "Event Added"
+                }
                 name.text.clear()
             }
             else if (name2 == "") {
                 error.text = "Task Needs a Name"
-            } else {
-                error.text = "Invalid date"
             }
         } catch (e: IllegalArgumentException) {
-            error.text = "Invalid date"
+            error.text = "Invalid Entry"
         }
     }
 
