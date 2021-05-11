@@ -236,7 +236,7 @@ class HomePageActivity : AppCompatActivity() {
     private fun invalid() {
         if (!valid) {
             var builder = AlertDialog.Builder(this)
-            builder.setTitle("No Tasks/Events Available")
+            builder.setTitle("No Tasks/Events Scheduled")
             builder.setNegativeButton(R.string.done_string, null)
             builder.show()
         }
@@ -342,6 +342,9 @@ class HomePageActivity : AppCompatActivity() {
                             var key = data.key.toString()
                             if (key=="date_due" || key=="date_set"){
                                 key=key.replace("_"," ")
+                            }
+                            if (key=="descr"){
+                                key=key+"iption"
                             }
                             var formatKey = key.substring(0,1).toUpperCase()+key.substring(1,key.length)
                             if (data.key.toString()!="date_due_timestamp") {
@@ -452,7 +455,7 @@ class HomePageActivity : AppCompatActivity() {
                                 }
                             }
                             if (name.text.toString()!="" && temp!=name.text.toString()){
-                                HomePageActivity.valid=true
+                                valid=true
                                 var myRef2 = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
                                 myRef2.child(temp).removeValue()
                                 if (!type) {
@@ -481,7 +484,8 @@ class HomePageActivity : AppCompatActivity() {
                 var myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
                 myRef.child(data[position]).removeValue()
                 builder.setCancelable(true)
-                builder.setTitle("${data[position]} Deleted")
+                var dataName = data[position].substring(0,1).toUpperCase()+data[position].substring(1,data[position].length)
+                builder.setTitle("$dataName Deleted")
                 builder.setNegativeButton(R.string.done_string, null)
                 builder.show()
             }

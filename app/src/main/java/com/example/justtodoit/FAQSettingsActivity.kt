@@ -92,7 +92,7 @@ class FAQSettingsActivity : AppCompatActivity() {
         var button4 = findViewById<ImageButton>(R.id.expandIcon4)
 
         if (!ques3Pressed){
-            answer3.text="The sign out button is located at the bottom of the settings main menu."
+            answer3.text="The sign out button is located near the bottom of the settings main menu."
             ques3Pressed=true
             ques1Pressed=false
             ques2Pressed=false

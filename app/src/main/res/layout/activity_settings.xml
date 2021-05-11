@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:soundEffectsEnabled="false"
     tools:context=".SettingsActivity">
 
     <TextView
@@ -108,6 +109,7 @@
         android:id="@+id/notificationButton"
         android:layout_width="wrap_content"
         android:layout_height="46dp"
+        android:onClick="notifications"
         android:text="Notifications"
         android:textColor="#000000"
         app:backgroundTint="#FFFFFF"
@@ -147,6 +149,17 @@
         app:backgroundTint="#FFFFFF"
         app:layout_constraintStart_toStartOf="@+id/box2"
         app:layout_constraintTop_toBottomOf="@+id/faqButton" />
+
+    <Button
+        android:id="@+id/deleteAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="delete"
+        android:text="Delete Account"
+        android:textColor="#EA0B0B"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@+id/box2"
+        app:layout_constraintTop_toBottomOf="@+id/signOut" />
 
     <TextView
         android:id="@+id/settingsAd"

@@ -27,7 +27,7 @@ class NotificationActivity : AppCompatActivity() {
             "red" -> theme.applyStyle(R.style.OverlayThemeRed, true)
         }
 
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_notification)
     }
 
     fun home(view: View) {
