@@ -15,7 +15,6 @@
         <activity android:name=".SettingsActivity" />
         <activity android:name=".AddTaskActivity" />
         <activity android:name=".MembershipActivity" />
-        <activity android:name=".MembershipThemesActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +26,17 @@
         <activity android:name=".HomePageActivity" />
         <activity android:name=".ThemeActivity" />
         <activity android:name=".NotificationActivity" />
+
+        <receiver
+            android:name=".MyReceiver"
+            android:enabled="true"
+            android:exported="false" >
+        </receiver>
+
+        <service
+            android:name=".MyNewIntentService"
+            android:exported="false" >
+        </service>
     </application>
 
 </manifest>

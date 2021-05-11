@@ -65,8 +65,26 @@
 
     <TextView
         android:id="@+id/box2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="386dp"
+        android:layout_height="261dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="8dp"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/box3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/box3"
+        android:layout_width="393dp"
+        android:layout_height="254dp"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="8dp"
@@ -75,10 +93,8 @@
         android:background="?attr/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/addButtonSet"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/box2" />
 
     <TextView
         android:id="@+id/line2"
@@ -114,5 +130,50 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Switch
+        android:id="@+id/notSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:checked="true"
+        android:text="Notifications Switch"
+        app:layout_constraintStart_toStartOf="@+id/box2"
+        app:layout_constraintTop_toTopOf="@+id/box2" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Plus Features"
+        app:layout_constraintStart_toStartOf="@+id/box3"
+        app:layout_constraintTop_toTopOf="@+id/box3" />
+
+    <Spinner
+        android:id="@+id/spinReminder"
+        android:layout_width="178dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/box3"
+        app:layout_constraintStart_toEndOf="@+id/textView22"
+        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="12dp"
+        android:text="Reminder time before deadline:"
+        app:layout_constraintStart_toStartOf="@+id/box3"
+        app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

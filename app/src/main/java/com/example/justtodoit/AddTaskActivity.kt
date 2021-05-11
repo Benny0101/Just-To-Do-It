@@ -1,11 +1,15 @@
 package com.example.justtodoit
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -13,6 +17,7 @@ import java.lang.Integer.parseInt
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.time.milliseconds
 
 class AddTaskActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
@@ -20,6 +25,7 @@ class AddTaskActivity : AppCompatActivity() {
     lateinit var myRef: DatabaseReference
     lateinit var time: String
     var type = "Task"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,7 +45,7 @@ class AddTaskActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_task)
         val spinner = findViewById<Spinner>(R.id.spinner)
         var items = arrayOf("0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00",
-                "12:00","1300","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00")
+                "12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00")
         val adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item,items)
         spinner.adapter=adapter
         spinner.onItemSelectedListener=object: AdapterView.OnItemSelectedListener {
@@ -99,6 +105,19 @@ class AddTaskActivity : AppCompatActivity() {
                     error.text = "Event Added"
                 }
                 name.text.clear()
+
+                if (NotificationActivity.notificationsOption) {
+                    val calendar = Calendar.getInstance()
+                    calendar.set(Calendar.MINUTE, 60 - NotificationActivity.reminderInterval)
+                    calendar.set(Calendar.HOUR_OF_DAY, timestamp.hours - 1)
+                    calendar.set(Calendar.DATE, timestamp.date)
+
+                    val notifyIntent = Intent(this, MyReceiver::class.java)
+                    val pendingIntent = PendingIntent.getBroadcast(this, 3, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+                    val alarmManager: AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+                }
+
             }
             else if (name2 == "") {
                 error.text = "Task Needs a Name"
