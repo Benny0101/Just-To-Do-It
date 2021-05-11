@@ -24,6 +24,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.lang.Exception
+import java.util.*
 
 class LoginActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
@@ -53,6 +54,22 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        // Streak System
+        var sharedPreferences = getSharedPreferences("Streak", Context.MODE_PRIVATE)
+        val c = Calendar.getInstance()
+        val thisDay = c.get(Calendar.DAY_OF_YEAR)
+        val lastDay = sharedPreferences.getInt("lastDate", 0)
+        var counter = sharedPreferences.getInt("streak", 0)
+
+        if (lastDay == thisDay - 1) {
+            counter++
+            sharedPreferences.edit().putInt("lastDate", thisDay)
+            sharedPreferences.edit().putInt("streak", counter).apply()
+        } else {
+            sharedPreferences.edit().putInt("lastDate", thisDay)
+            sharedPreferences.edit().putInt("streak", 1).apply()
+        }
 
         createNotificationChannel()
 
@@ -162,6 +179,8 @@ class LoginActivity : AppCompatActivity() {
             val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
                 description = descriptionText
             }
+            channel.enableVibration(true)
+
             // Register the channel with the system
             val notificationManager: NotificationManager =
                     getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

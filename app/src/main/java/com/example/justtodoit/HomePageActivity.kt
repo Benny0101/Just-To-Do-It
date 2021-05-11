@@ -30,6 +30,7 @@ class HomePageActivity : AppCompatActivity() {
     var shown = "View All Tasks & Events"
     lateinit var auth: FirebaseAuth
     private lateinit var myRef: DatabaseReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -48,6 +49,10 @@ class HomePageActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_home)
 
+
+        val streakText = findViewById<TextView>(R.id.streakNumber)
+        var sharedPreferences = getSharedPreferences("Streak", Context.MODE_PRIVATE)
+        streakText.text = "Streak: " + sharedPreferences.getInt("streak", 0)
 
         val spinner = findViewById<Spinner>(R.id.spinner2)
         var items = arrayOf("Day", "Week", "Month")
