@@ -77,8 +77,6 @@ class AddTaskActivity : AppCompatActivity() {
         var name2 = findViewById<EditText>(R.id.editName).text.toString()
         var dateFormatter = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK)
         try {
-            var duplicate =myRef.child(auth.currentUser.uid).child(name2)
-            println(duplicate)
             var day = date2.dayOfMonth.toString()
             var month = (date2.month+1).toString()
             if (day.length == 1) day= "0$day"
