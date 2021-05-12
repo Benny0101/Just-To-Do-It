@@ -83,9 +83,15 @@ class NotificationActivity : AppCompatActivity() {
         finish()
     }
 
+    fun back(view: View) {
+        startActivity(Intent(this, SettingsActivity::class.java))
+        finish()
+    }
+
     companion object {
         var notificationsOption : Boolean = true
         var reminderIndex = 0
         var reminderInterval : Int = 0
     }
+
 }
