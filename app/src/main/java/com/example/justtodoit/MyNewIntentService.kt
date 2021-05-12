@@ -25,12 +25,12 @@ class MyNewIntentService : IntentService("MyNewIntentService") {
         val pendingIntent = PendingIntent.getActivity(this, 0, notifyIntent, 0)
 
         var builder = NotificationCompat.Builder(this, channelId)
-                .setSmallIcon(R.drawable.add_icon_foreground)
-                .setContentTitle("Just To Do It")
-                .setContentText("Task deadline")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
+            .setSmallIcon(R.drawable.add_icon_foreground)
+            .setContentTitle("Just To Do It")
+            .setContentText("Task deadline")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
 
         val notificationCompat = builder.build()
         val managerCompat = NotificationManagerCompat.from(this)
@@ -39,5 +39,3 @@ class MyNewIntentService : IntentService("MyNewIntentService") {
         }
     }
 }
-
-// Test test

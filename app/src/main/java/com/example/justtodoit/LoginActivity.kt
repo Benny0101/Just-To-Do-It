@@ -174,7 +174,7 @@ class LoginActivity : AppCompatActivity() {
 
             // Register the channel with the system
             val notificationManager: NotificationManager =
-                    getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
     }
@@ -189,5 +189,3 @@ class LoginActivity : AppCompatActivity() {
         googleSignInClient.signOut()
     }
 }
-
-//ooga bogga

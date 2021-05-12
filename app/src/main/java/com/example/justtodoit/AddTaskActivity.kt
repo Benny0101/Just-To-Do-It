@@ -24,15 +24,15 @@ class AddTaskActivity : AppCompatActivity() {
     lateinit var database: FirebaseDatabase
     lateinit var myRef: DatabaseReference
     lateinit var time: String
-    var type = "Task"
+    var type = "Null"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // Add this to every activity if you wish to have the theme apply
         ThemeActivity.sharedPreferences = getSharedPreferences(
-                "ThemePref",
-                Context.MODE_PRIVATE
+            "ThemePref",
+            Context.MODE_PRIVATE
         )
 
         when (ThemeActivity.sharedPreferences.getString(ThemeActivity.themeKey, "light")) {
@@ -45,7 +45,7 @@ class AddTaskActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_task)
         val spinner = findViewById<Spinner>(R.id.spinner)
         var items = arrayOf("0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00",
-                "12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00")
+            "12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00")
         val adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item,items)
         spinner.adapter=adapter
         spinner.onItemSelectedListener=object: AdapterView.OnItemSelectedListener {
@@ -84,41 +84,58 @@ class AddTaskActivity : AppCompatActivity() {
         var dateFormatter = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK)
         try {
             var day = date2.dayOfMonth.toString()
-            var month = (date2.month+1).toString()
-            if (day.length == 1) day= "0$day"
+            var month = (date2.month + 1).toString()
+            if (day.length == 1) day = "0$day"
             if (month.length == 1) month = "0$month"
-            if (name2!="") {
-                var date_due = "$day/$month/${date2.year} $time"
-                var details = TaskDetails(descr, dateFormatter.format(Date()).toString(), date_due, type)
-                myRef.child(auth.currentUser.uid).child(name2).setValue(details)
-                var timestamp= SimpleDateFormat("dd/mm/yyyy HH").parse(date_due)
-                myRef.child(auth.currentUser.uid).child(name2).child("date_due_timestamp").setValue(timestamp.time)
-                if (type=="Task"){
-                    myRef.child(auth.currentUser.uid).child(name2).child("status").setValue("Active")
-                    //Not an error in this case
-                    error.text = "Task Added"
-                }
-                if (type=="Event"){
-                    //Not an error in this case
-                    error.text = "Event Added"
-                }
-                name.text.clear()
+            if (type == "Task" || type == "Event"){
+                if (name2 != "") {
+                    var date_due = "$day/$month/${date2.year} $time"
+                    var details =
+                        TaskDetails(descr, dateFormatter.format(Date()).toString(), date_due, type)
+                    myRef.child(auth.currentUser.uid).child(name2).setValue(details)
+                    var timestamp = SimpleDateFormat("dd/mm/yyyy HH").parse(date_due)
+                    myRef.child(auth.currentUser.uid).child(name2).child("date_due_timestamp")
+                        .setValue(timestamp.time)
+                    if (type == "Task") {
+                        myRef.child(auth.currentUser.uid).child(name2).child("status")
+                            .setValue("Active")
+                        //Not an error in this case
+                        error.text = "Task Added"
+                    }
+                    if (type == "Event") {
+                        //Not an error in this case
+                        error.text = "Event Added"
+                    }
+                    name.text.clear()
 
-                if (NotificationActivity.notificationsOption) {
-                    val calendar = Calendar.getInstance()
-                    calendar.set(Calendar.MINUTE, 60 - NotificationActivity.reminderInterval)
-                    calendar.set(Calendar.HOUR_OF_DAY, timestamp.hours - 1)
-                    calendar.set(Calendar.DATE, timestamp.date)
+                    if (NotificationActivity.notificationsOption) {
+                        val calendar = Calendar.getInstance()
+                        calendar.set(Calendar.MINUTE, 60 - NotificationActivity.reminderInterval)
+                        calendar.set(Calendar.HOUR_OF_DAY, timestamp.hours - 1)
+                        calendar.set(Calendar.DATE, timestamp.date)
 
-                    val notifyIntent = Intent(this, MyReceiver::class.java)
-                    val pendingIntent = PendingIntent.getBroadcast(this, 3, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-                    val alarmManager: AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+                        val notifyIntent = Intent(this, MyReceiver::class.java)
+                        val pendingIntent = PendingIntent.getBroadcast(
+                            this,
+                            3,
+                            notifyIntent,
+                            PendingIntent.FLAG_UPDATE_CURRENT
+                        )
+                        val alarmManager: AlarmManager =
+                            getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                        alarmManager.set(
+                            AlarmManager.RTC_WAKEUP,
+                            calendar.timeInMillis,
+                            pendingIntent
+                        )
+                    }
+
+                } else if (name2 == "") {
+                    error.text = "Task Needs a Name"
                 }
-
-            }
-            else if (name2 == "") {
-                error.text = "Task Needs a Name"
+        }
+            else{
+                error.text="Select Task or Event Type"
             }
         } catch (e: IllegalArgumentException) {
             error.text = "Invalid Entry"
@@ -133,13 +150,16 @@ class AddTaskActivity : AppCompatActivity() {
     }
 
     fun type(view: View) {
-        var check = findViewById<RadioButton>(R.id.radioButton)
-        if (type=="Event"){
-            check.isChecked = false
-            type="Task"
-        }
-        if (check.isChecked) {
-            type = "Event"
-        }
+        var event = findViewById<RadioButton>(R.id.radioButton)
+        var task = findViewById<RadioButton>(R.id.radioButton2)
+        type = "Event"
+        task.isChecked = false
+    }
+
+    fun type2(view: View) {
+        var event = findViewById<RadioButton>(R.id.radioButton)
+        var task = findViewById<RadioButton>(R.id.radioButton2)
+        type = "Task"
+        event.isChecked = false
     }
 }
