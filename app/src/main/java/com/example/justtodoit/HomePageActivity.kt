@@ -34,6 +34,22 @@ class HomePageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Streak System
+        var sharedPref = getSharedPreferences("Streak", Context.MODE_PRIVATE)
+        val c = Calendar.getInstance()
+        val thisDay = c.get(Calendar.DAY_OF_YEAR)
+        val lastDay = sharedPref.getInt("lastDate", 0)
+        var counter = sharedPref.getInt("streak", 0)
+
+        if (lastDay == thisDay - 1) {
+            counter++
+            sharedPref.edit().putInt("lastDate", thisDay)
+            sharedPref.edit().putInt("streak", counter).apply()
+        } else {
+            sharedPref.edit().putInt("lastDate", thisDay)
+            sharedPref.edit().putInt("streak", 1).apply()
+        }
+
         // Add this to every activity if you wish to have the theme apply
         ThemeActivity.sharedPreferences = getSharedPreferences(
                 "ThemePref",

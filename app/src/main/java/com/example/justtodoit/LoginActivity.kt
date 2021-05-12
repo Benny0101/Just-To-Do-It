@@ -55,22 +55,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Streak System
-        var sharedPreferences = getSharedPreferences("Streak", Context.MODE_PRIVATE)
-        val c = Calendar.getInstance()
-        val thisDay = c.get(Calendar.DAY_OF_YEAR)
-        val lastDay = sharedPreferences.getInt("lastDate", 0)
-        var counter = sharedPreferences.getInt("streak", 0)
-
-        if (lastDay == thisDay - 1) {
-            counter++
-            sharedPreferences.edit().putInt("lastDate", thisDay)
-            sharedPreferences.edit().putInt("streak", counter).apply()
-        } else {
-            sharedPreferences.edit().putInt("lastDate", thisDay)
-            sharedPreferences.edit().putInt("streak", 1).apply()
-        }
-
         createNotificationChannel()
 
         /** Configure Google Sign In */
