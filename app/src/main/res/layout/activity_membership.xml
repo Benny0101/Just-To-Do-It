@@ -94,8 +94,8 @@
 
     <TextView
         android:id="@+id/box6"
-        android:layout_width="0dp"
-        android:layout_height="254dp"
+        android:layout_width="387dp"
+        android:layout_height="276dp"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginEnd="12dp"
@@ -183,7 +183,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="12dp"
         android:onClick="blueTheme"
-        android:text="Button"
+        android:text="Select"
         app:layout_constraintEnd_toEndOf="@+id/box2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView17"
@@ -196,11 +196,33 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:onClick="redTheme"
-        android:text="Button"
+        android:text="Select"
         app:layout_constraintEnd_toEndOf="@+id/box2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView18"
         app:layout_constraintTop_toBottomOf="@+id/button7" />
+
+    <Button
+        android:id="@+id/getPlusButton"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:text="Get Plus"
+        android:onClick="getPlus"
+        app:layout_constraintBottom_toTopOf="@+id/box2"
+        app:layout_constraintEnd_toEndOf="@+id/box2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView16"
+        app:layout_constraintTop_toBottomOf="@+id/plusTitle" />
+
+    <TextView
+        android:id="@+id/plusValid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="no"
+        app:layout_constraintBottom_toTopOf="@+id/box2"
+        app:layout_constraintEnd_toStartOf="@+id/getPlusButton"
+        app:layout_constraintStart_toEndOf="@+id/textView16"
+        app:layout_constraintTop_toBottomOf="@+id/plusTitle" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
