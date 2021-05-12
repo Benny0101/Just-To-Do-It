@@ -218,7 +218,6 @@
         android:id="@+id/plusValid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="no"
         app:layout_constraintBottom_toTopOf="@+id/box2"
         app:layout_constraintEnd_toStartOf="@+id/getPlusButton"
         app:layout_constraintStart_toEndOf="@+id/textView16"
