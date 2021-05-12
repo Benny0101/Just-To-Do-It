@@ -20,6 +20,11 @@ import java.util.*
 import kotlin.time.milliseconds
 
 class AddTaskActivity : AppCompatActivity() {
+
+    companion object{
+        lateinit var nameRef:String
+        lateinit var type2: String
+    }
     lateinit var auth: FirebaseAuth
     lateinit var database: FirebaseDatabase
     lateinit var myRef: DatabaseReference
@@ -107,7 +112,8 @@ class AddTaskActivity : AppCompatActivity() {
                         error.text = "Event Added"
                     }
                     name.text.clear()
-
+                    nameRef=name2
+                    type2=type
                     if (NotificationActivity.notificationsOption) {
                         val calendar = Calendar.getInstance()
                         calendar.set(Calendar.MINUTE, 60 - NotificationActivity.reminderInterval)
@@ -115,19 +121,9 @@ class AddTaskActivity : AppCompatActivity() {
                         calendar.set(Calendar.DATE, timestamp.date)
 
                         val notifyIntent = Intent(this, MyReceiver::class.java)
-                        val pendingIntent = PendingIntent.getBroadcast(
-                            this,
-                            3,
-                            notifyIntent,
-                            PendingIntent.FLAG_UPDATE_CURRENT
-                        )
-                        val alarmManager: AlarmManager =
-                            getSystemService(Context.ALARM_SERVICE) as AlarmManager
-                        alarmManager.set(
-                            AlarmManager.RTC_WAKEUP,
-                            calendar.timeInMillis,
-                            pendingIntent
-                        )
+                        val pendingIntent = PendingIntent.getBroadcast(this, 3, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+                        val alarmManager: AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
                     }
 
                 } else if (name2 == "") {

@@ -74,10 +74,15 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     fun signOut(view: View) {
-        auth.signOut()
-        Auth.GoogleSignInApi.signOut(googleApiClient)
+        try {
+            auth.signOut()
+            Auth.GoogleSignInApi.signOut(googleApiClient)
+        }
+        catch (e: Exception){
+        }
         val logoutIntent = Intent(this, LoginActivity::class.java)
         startActivity(logoutIntent)
+        finish()
 
     }
 

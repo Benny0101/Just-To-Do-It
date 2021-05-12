@@ -38,9 +38,10 @@ class RegisterActivity : AppCompatActivity() {
                 var details = userDetails(email,type)
                 myRef.child(auth.currentUser.uid).setValue(details)
                 startActivity(Intent(this,LoginActivity::class.java))
+                finish()
             }
             else {
-                invalid.text="Invalid Account"
+                invalid.text="Check if the email is valid, password must contains at least 6 characters"
             }
             }
         }

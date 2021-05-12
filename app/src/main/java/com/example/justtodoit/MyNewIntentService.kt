@@ -23,11 +23,12 @@ class MyNewIntentService : IntentService("MyNewIntentService") {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         val pendingIntent = PendingIntent.getActivity(this, 0, notifyIntent, 0)
-
+        var name = AddTaskActivity.nameRef
+        var type = AddTaskActivity.type2
         var builder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.add_icon_foreground)
             .setContentTitle("Just To Do It")
-            .setContentText("Task deadline")
+            .setContentText("$type $name deadline")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)

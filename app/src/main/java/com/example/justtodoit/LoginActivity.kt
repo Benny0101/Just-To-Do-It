@@ -185,7 +185,7 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun signOut() {
+     fun signOut() {
         googleSignInClient.signOut()
     }
 }
