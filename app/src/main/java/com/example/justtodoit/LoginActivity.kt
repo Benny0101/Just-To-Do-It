@@ -83,24 +83,31 @@ class LoginActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            val exception = task.exception
-            if (task.isSuccessful) {
-                try {
-                    // Google Sign In was successful, authenticate with Firebase
-                    val account = task.getResult(ApiException::class.java)!!
-                    Log.d("LoginActivity", "firebaseAuthWithGoogle:" + account.id)
-                    firebaseAuthWithGoogle(account.idToken!!)
-                } catch (e: ApiException) {
-                    // Google Sign In failed, update UI appropriately
-                    Log.w("LoginActivity", "Google sign in failed", e)
-                    throw Exception(e.message)
+        var incorrect = findViewById<TextView>(R.id.textView4)
+        try {
+            if (requestCode == RC_SIGN_IN) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+                val exception = task.exception
+                if (task.isSuccessful) {
+                    try {
+                        // Google Sign In was successful, authenticate with Firebase
+                        val account = task.getResult(ApiException::class.java)!!
+                        Log.d("LoginActivity", "firebaseAuthWithGoogle:" + account.id)
+                        firebaseAuthWithGoogle(account.idToken!!)
+                    } catch (e: ApiException) {
+                        // Google Sign In failed, update UI appropriately
+                        Log.w("LoginActivity", "Google sign in failed", e)
+                        throw Exception(e.message)
+                    }
+                } else {
+                    Log.w("LoginActivity", exception.toString())
+                    throw Exception(exception.toString())
+                    incorrect.text="Gmail Sign In Failed"
                 }
-            } else {
-                Log.w("LoginActivity", exception.toString())
-                throw Exception(exception.toString())
             }
+        }
+        catch (e: Exception){
+            incorrect.text="Gmail Sign In Failed"
         }
     }
 
