@@ -15,5 +15,7 @@ Firebase is used as an external database which stores user information and users
 
 Streak systems & plus status are stored on the android device rather than in the firebase realtime database.
 
+Michael:Test
+
 
 
