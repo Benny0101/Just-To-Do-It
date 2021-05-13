@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -41,8 +42,10 @@ class MembershipActivity : AppCompatActivity() {
         var plusStatus = prefs.getBoolean("Status", false)
         var ad = findViewById<TextView>(R.id.plusAd)
         var notificationSet = findViewById<TextView>(R.id.textView24)
+        var plusButton = findViewById<Button>(R.id.getPlusButton)
         if (plusStatus) {
-            plusValid.text = "⭐"
+            plusButton.visibility =  View.GONE
+            plusValid.text = "⭐Plus Member!"
             ad.text = ""
             notificationSet.text="You can configure your Notifications"
         } else {
@@ -55,11 +58,14 @@ class MembershipActivity : AppCompatActivity() {
 
     fun getPlus(view: View) {
         val prefs = getSharedPreferences("Plus", Context.MODE_PRIVATE)
-        prefs.edit().putBoolean("Status", true).apply()
-        val intent = intent
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-        finish()
-        startActivity(intent)
+        var plusStatus = prefs.getBoolean("Status", false)
+        if (!plusStatus) {
+            prefs.edit().putBoolean("Status", true).apply()
+            val intent = intent
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            finish()
+            startActivity(intent)
+        }
     }
 
     fun blueTheme(view: View) {

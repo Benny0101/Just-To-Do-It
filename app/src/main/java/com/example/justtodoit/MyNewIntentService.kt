@@ -24,6 +24,7 @@ class MyNewIntentService : IntentService("MyNewIntentService") {
         }
         val pendingIntent = PendingIntent.getActivity(this, 0, notifyIntent, 0)
         var name = AddTaskActivity.nameRef
+        name = name.substring(0,1).toUpperCase()+name.substring(1,name.length)
         var type = AddTaskActivity.typeRef
         var builder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.add_icon_foreground)
