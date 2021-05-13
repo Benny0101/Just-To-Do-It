@@ -48,18 +48,19 @@ class NotificationActivity : AppCompatActivity() {
         })
 
         val spinner = findViewById<Spinner>(R.id.spinReminder)
-        val items = arrayOf(5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55)
+        val items = arrayOf("1 Hour", "2 Hours", "3 Hours", "4 Hours", "5 Hours", "6 Hours", "7 Hours", "8 Hours", "9 Hours", "10 Hours", "11 Hours", "12 Hours", "1 Day", "2 Days", "1 Week", "2 Weeks", "3 Weeks", "1 Month")
+        val values = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 48, 168, 336, 504, 768)
         val adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, items)
 
         spinner.adapter = adapter
         spinner.setSelection(reminderIndex)
 
-        reminderInterval = spinner.selectedItem as Int
+        reminderInterval = values[reminderIndex]
 
         spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                reminderInterval = spinner.selectedItem as Int
                 reminderIndex = spinner.selectedItemPosition
+                reminderInterval = values[reminderIndex]
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {

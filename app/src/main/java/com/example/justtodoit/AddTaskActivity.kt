@@ -126,9 +126,9 @@ class AddTaskActivity : AppCompatActivity() {
                     typeRef=type
                     if (NotificationActivity.notificationsOption) {
                         val calendar = Calendar.getInstance()
-                        calendar.set(Calendar.MINUTE, 60 - NotificationActivity.reminderInterval)
-                        calendar.set(Calendar.HOUR_OF_DAY, timestamp.hours - 1)
+                        calendar.set(Calendar.HOUR_OF_DAY, timestamp.hours)
                         calendar.set(Calendar.DATE, timestamp.date)
+                        calendar.add(Calendar.HOUR_OF_DAY, -NotificationActivity.reminderInterval)
 
                         val notifyIntent = Intent(this, MyReceiver::class.java)
                         val pendingIntent = PendingIntent.getBroadcast(this, 3, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT)
