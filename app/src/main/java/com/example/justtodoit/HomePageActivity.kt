@@ -38,16 +38,19 @@ class HomePageActivity : AppCompatActivity() {
         // Streak System
         var sharedPref = getSharedPreferences("Streak", Context.MODE_PRIVATE)
         val c = Calendar.getInstance()
-        val thisDay = c.get(Calendar.DAY_OF_YEAR)
-        val lastDay = sharedPref.getInt("lastDate", thisDay)
-        var counter = sharedPref.getInt("streak", 0)
-        if (lastDay == thisDay - 1) {
+        val thisDay2 = c.get(Calendar.DAY_OF_YEAR)
+        val thisDay = sharedPref.getInt("thisDay", thisDay2)
+        val lastDay = sharedPref.getInt("lastDate", thisDay2)
+        var counter = sharedPref.getInt("streak", 55555)
+        if (thisDay2 == lastDay - 1) {
             counter++
-            sharedPref.edit().putInt("lastDate", thisDay)
+            sharedPref.edit().putInt("lastDate", lastDay)
             sharedPref.edit().putInt("streak", counter).apply()
+            sharedPref.edit().putInt("thisDay", thisDay).apply()
         } else {
-            sharedPref.edit().putInt("lastDate", thisDay)
+            sharedPref.edit().putInt("lastDate", thisDay2+1)
             sharedPref.edit().putInt("streak", 1).apply()
+            sharedPref.edit().putInt("thisDay", thisDay).apply()
         }
 
         // Add this to every activity if you wish to have the theme apply
