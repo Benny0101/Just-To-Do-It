@@ -184,11 +184,11 @@
         android:id="@+id/taskError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="12dp"
         android:layout_marginBottom="4dp"
         android:text=""
         android:textColor="#2B2B2B"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/box"
         app:layout_constraintStart_toStartOf="@+id/box" />
 
@@ -263,7 +263,7 @@
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="6dp"
         android:text="Task Type?"
         app:layout_constraintStart_toEndOf="@+id/radioButton"

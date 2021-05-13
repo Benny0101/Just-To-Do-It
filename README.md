@@ -7,7 +7,7 @@ When registering an account, Email must contain an @ symbol and . with 2 charact
 
 When registering an account, fake emails can be used (emails are not authenticated).
 
-Google sign works on real devices well but has some issues on some emulators, especially when you re-sign in after logging out.
+Google sign works well on real devices but has some issues on some emulators, especially when you re-sign in after logging out.
 
 The app is set to min API/SDK version 21.
 

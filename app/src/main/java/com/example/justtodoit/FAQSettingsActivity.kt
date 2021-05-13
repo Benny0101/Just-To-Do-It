@@ -29,6 +29,15 @@ class FAQSettingsActivity : AppCompatActivity() {
         }
 
         setContentView(R.layout.activity_f_a_q_settings)
+
+        val prefs = getSharedPreferences("Plus", Context.MODE_PRIVATE)
+        var plusStatus = prefs.getBoolean("Status", false)
+        var ad = findViewById<TextView>(R.id.textViewAd)
+        if (plusStatus) {
+            ad.text = ""
+        } else {
+            ad.text = "Ad"
+        }
     }
 
     fun plus(view: View) {
@@ -120,8 +129,8 @@ class FAQSettingsActivity : AppCompatActivity() {
         var button4 = findViewById<ImageButton>(R.id.expandIcon4)
 
         if (!ques4Pressed){
-            answer4.text="In the Add Task/Event screen, you can select the date of your task/event from the scrollable calendar."+
-                    " You can choose the due date for any day of the week due and set the view type to weekly and select any date from that week to see it."
+            answer4.text="In the Add Task/Event screen, you can select the date of your task/event from the scrollable calendar,"+
+                    " you can choose the due date for any day of the week it's due. Then to view it, set the view type to weekly and select any date from that week to see it."
             ques4Pressed=true
             ques1Pressed=false
             ques2Pressed=false

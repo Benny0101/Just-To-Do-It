@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_membership.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -38,9 +39,8 @@ class HomePageActivity : AppCompatActivity() {
         var sharedPref = getSharedPreferences("Streak", Context.MODE_PRIVATE)
         val c = Calendar.getInstance()
         val thisDay = c.get(Calendar.DAY_OF_YEAR)
-        val lastDay = sharedPref.getInt("lastDate", 0)
+        val lastDay = sharedPref.getInt("lastDate", thisDay)
         var counter = sharedPref.getInt("streak", 0)
-
         if (lastDay == thisDay - 1) {
             counter++
             sharedPref.edit().putInt("lastDate", thisDay)
@@ -64,6 +64,14 @@ class HomePageActivity : AppCompatActivity() {
         }
 
         setContentView(R.layout.activity_home)
+        val prefs = getSharedPreferences("Plus", Context.MODE_PRIVATE)
+        var plusStatus = prefs.getBoolean("Status", false)
+        var ad = findViewById<TextView>(R.id.textView6)
+        if (plusStatus) {
+            ad.text = ""
+        } else {
+            ad.text = "Ad"
+        }
 
 
         val streakText = findViewById<TextView>(R.id.streakNumber)

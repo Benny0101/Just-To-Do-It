@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class ThemeActivity : AppCompatActivity() {
@@ -31,6 +32,15 @@ class ThemeActivity : AppCompatActivity() {
         }
 
         setContentView(R.layout.activity_theme)
+
+        val prefs = getSharedPreferences("Plus", Context.MODE_PRIVATE)
+        var plusStatus = prefs.getBoolean("Status", false)
+        var ad = findViewById<TextView>(R.id.textViewAd)
+        if (plusStatus) {
+            ad.text = ""
+        } else {
+            ad.text = "Ad"
+        }
     }
 
     fun lightTheme(view: View) {

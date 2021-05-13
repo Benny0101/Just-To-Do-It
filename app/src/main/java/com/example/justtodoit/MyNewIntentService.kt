@@ -24,7 +24,7 @@ class MyNewIntentService : IntentService("MyNewIntentService") {
         }
         val pendingIntent = PendingIntent.getActivity(this, 0, notifyIntent, 0)
         var name = AddTaskActivity.nameRef
-        var type = AddTaskActivity.type2
+        var type = AddTaskActivity.typeRef
         var builder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.add_icon_foreground)
             .setContentTitle("Just To Do It")

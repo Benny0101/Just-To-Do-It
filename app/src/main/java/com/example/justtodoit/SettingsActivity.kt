@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -54,6 +55,15 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         setContentView(R.layout.activity_settings)
+
+        val prefs = getSharedPreferences("Plus", Context.MODE_PRIVATE)
+        var plusStatus = prefs.getBoolean("Status", false)
+        var ad = findViewById<TextView>(R.id.settingsAd)
+        if (plusStatus) {
+            ad.text = ""
+        } else {
+            ad.text = "Ad"
+        }
 
         auth = FirebaseAuth.getInstance()
     }

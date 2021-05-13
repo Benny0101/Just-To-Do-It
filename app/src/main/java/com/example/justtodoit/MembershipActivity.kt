@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -20,8 +21,6 @@ class MembershipActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val prefs = getSharedPreferences("Plus", Context.MODE_PRIVATE)
-        var plusStatus = prefs.getBoolean("Status", false)
 
 
         // Add this to every activity if you wish to have the theme apply
@@ -38,20 +37,18 @@ class MembershipActivity : AppCompatActivity() {
         }
 
         setContentView(R.layout.activity_membership)
+        val prefs = getSharedPreferences("Plus", Context.MODE_PRIVATE)
+        var plusStatus = prefs.getBoolean("Status", false)
+        var ad = findViewById<TextView>(R.id.plusAd)
+        if (plusStatus) {
+            ad.text = ""
+        } else {
+            ad.text = "Ad"
+        }
 
-        if (plusStatus == true) {
-            button7.isEnabled = true
-            button7.isClickable = true
-            button8.isEnabled = true
-            button8.isClickable = true
-            getPlusButton.isEnabled = false
-            getPlusButton.isClickable = false
+        if (plusStatus) {
             plusValid.text = "⭐"
         } else {
-            button7.isEnabled = false
-            button7.isClickable = false
-            button8.isEnabled = false
-            button8.isClickable = false
             plusValid.text = ""
         }
 
@@ -60,22 +57,46 @@ class MembershipActivity : AppCompatActivity() {
     fun getPlus(view: View) {
         val prefs = getSharedPreferences("Plus", Context.MODE_PRIVATE)
         prefs.edit().putBoolean("Status", true).apply()
+        val intent = intent
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        finish()
+        startActivity(intent)
     }
 
     fun blueTheme(view: View) {
-        ThemeActivity.sharedPreferences.edit().putString(ThemeActivity.themeKey, "blue").apply()
-        val intent = intent
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-        finish()
-        startActivity(intent)
+        val prefs = getSharedPreferences("Plus", Context.MODE_PRIVATE)
+        var plusStatus = prefs.getBoolean("Status", false)
+        var error = findViewById<TextView>(R.id.textView23)
+        var sharedPref = getSharedPreferences("Streak", Context.MODE_PRIVATE)
+        var counter = sharedPref.getInt("streak", 0)
+        if (plusStatus || counter>15) {
+            ThemeActivity.sharedPreferences.edit().putString(ThemeActivity.themeKey, "blue").apply()
+            val intent = intent
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            finish()
+            startActivity(intent)
+            error.text=""
+        }
+        else{
+            error.text="Requires Plus Membership or a streak of 15"
+        }
     }
 
     fun redTheme(view: View) {
-        ThemeActivity.sharedPreferences.edit().putString(ThemeActivity.themeKey, "red").apply()
-        val intent = intent
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-        finish()
-        startActivity(intent)
+        val prefs = getSharedPreferences("Plus", Context.MODE_PRIVATE)
+        var plusStatus = prefs.getBoolean("Status", false)
+        var error = findViewById<TextView>(R.id.textView23)
+        if (plusStatus) {
+            ThemeActivity.sharedPreferences.edit().putString(ThemeActivity.themeKey, "red").apply()
+            val intent = intent
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            finish()
+            startActivity(intent)
+            error.text=""
+        }
+        else{
+            error.text="Requires Plus Membership"
+        }
     }
 
 
@@ -90,6 +111,11 @@ class MembershipActivity : AppCompatActivity() {
     }
 
     fun settings(view: View) {
+        startActivity(Intent(this, SettingsActivity::class.java))
+        finish()
+    }
+
+    fun back(view: View) {
         startActivity(Intent(this, SettingsActivity::class.java))
         finish()
     }

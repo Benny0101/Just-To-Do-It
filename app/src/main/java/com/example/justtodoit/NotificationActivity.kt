@@ -31,6 +31,15 @@ class NotificationActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_notification)
 
+        val prefs = getSharedPreferences("Plus", Context.MODE_PRIVATE)
+        var plusStatus = prefs.getBoolean("Status", false)
+        var ad = findViewById<TextView>(R.id.settingsAd)
+        if (plusStatus) {
+            ad.text = ""
+        } else {
+            ad.text = "Ad"
+        }
+
         val notSwitch = findViewById<Switch>(R.id.notSwitch)
         notSwitch.isChecked = notificationsOption
 

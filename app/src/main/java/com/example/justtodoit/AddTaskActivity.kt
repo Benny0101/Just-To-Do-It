@@ -23,7 +23,7 @@ class AddTaskActivity : AppCompatActivity() {
 
     companion object{
         lateinit var nameRef:String
-        lateinit var type2: String
+        lateinit var typeRef: String
     }
     lateinit var auth: FirebaseAuth
     lateinit var database: FirebaseDatabase
@@ -48,6 +48,16 @@ class AddTaskActivity : AppCompatActivity() {
         }
 
         setContentView(R.layout.activity_add_task)
+
+        val prefs = getSharedPreferences("Plus", Context.MODE_PRIVATE)
+        var plusStatus = prefs.getBoolean("Status", false)
+        var ad = findViewById<TextView>(R.id.textViewAd)
+        if (plusStatus) {
+            ad.text = ""
+        } else {
+            ad.text = "Ad"
+        }
+
         val spinner = findViewById<Spinner>(R.id.spinner)
         var items = arrayOf("0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00",
             "12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00")
@@ -92,8 +102,8 @@ class AddTaskActivity : AppCompatActivity() {
             var month = (date2.month + 1).toString()
             if (day.length == 1) day = "0$day"
             if (month.length == 1) month = "0$month"
-            if (type == "Task" || type == "Event"){
-                if (name2 != "") {
+            if (name2!=""){
+                if (type == "Task" || type == "Event") {
                     var date_due = "$day/$month/${date2.year} $time"
                     var details =
                         TaskDetails(descr, dateFormatter.format(Date()).toString(), date_due, type)
@@ -113,7 +123,7 @@ class AddTaskActivity : AppCompatActivity() {
                     }
                     name.text.clear()
                     nameRef=name2
-                    type2=type
+                    typeRef=type
                     if (NotificationActivity.notificationsOption) {
                         val calendar = Calendar.getInstance()
                         calendar.set(Calendar.MINUTE, 60 - NotificationActivity.reminderInterval)
@@ -126,12 +136,12 @@ class AddTaskActivity : AppCompatActivity() {
                         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
                     }
 
-                } else if (name2 == "") {
-                    error.text = "Task Needs a Name"
+                } else {
+                    error.text = "Select Task or Event Type"
                 }
-        }
+            }
             else{
-                error.text="Select Task or Event Type"
+                error.text="Task/Event Needs a Name"
             }
         } catch (e: IllegalArgumentException) {
             error.text = "Invalid Entry"

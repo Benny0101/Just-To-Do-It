@@ -68,17 +68,16 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginRight="12dp"
         android:layout_marginBottom="8dp"
         android:background="?attr/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/box6"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView15"
@@ -94,8 +93,8 @@
 
     <TextView
         android:id="@+id/box6"
-        android:layout_width="387dp"
-        android:layout_height="276dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginEnd="12dp"
@@ -104,7 +103,8 @@
         app:layout_constraintBottom_toTopOf="@+id/addButtonSet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/box2" />
 
     <TextView
         android:id="@+id/textView19"
@@ -158,36 +158,35 @@
         android:layout_width="72dp"
         android:layout_height="22dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:text="Blue"
         app:layout_constraintStart_toStartOf="@+id/box2"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        android:layout_marginLeft="8dp" />
 
     <TextView
         android:id="@+id/textView18"
         android:layout_width="72dp"
         android:layout_height="22dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="24dp"
         android:text="Red"
         app:layout_constraintStart_toStartOf="@+id/box2"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toBottomOf="@+id/textView17"
+        android:layout_marginLeft="8dp" />
 
     <Button
         android:id="@+id/button7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="12dp"
         android:onClick="blueTheme"
         android:text="Select"
         app:layout_constraintEnd_toEndOf="@+id/box2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        android:layout_marginLeft="16dp" />
 
     <Button
         android:id="@+id/button8"
@@ -204,15 +203,15 @@
 
     <Button
         android:id="@+id/getPlusButton"
-        android:layout_width="88dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Get Plus"
         android:onClick="getPlus"
+        android:text="Get Plus"
         app:layout_constraintBottom_toTopOf="@+id/box2"
         app:layout_constraintEnd_toEndOf="@+id/box2"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/plusTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/line2" />
 
     <TextView
         android:id="@+id/plusValid"
@@ -222,6 +221,30 @@
         app:layout_constraintEnd_toStartOf="@+id/getPlusButton"
         app:layout_constraintStart_toEndOf="@+id/textView16"
         app:layout_constraintTop_toBottomOf="@+id/plusTitle" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/box2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/box2"
+        app:layout_constraintTop_toBottomOf="@+id/button8" />
+
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="4dp"
+        android:text="Back"
+        android:textColor="#000000"
+        android:onClick="back"
+        app:layout_constraintBottom_toBottomOf="@+id/box6"
+        app:layout_constraintEnd_toEndOf="@+id/box6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
