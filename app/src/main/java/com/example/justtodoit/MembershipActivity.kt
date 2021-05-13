@@ -40,16 +40,15 @@ class MembershipActivity : AppCompatActivity() {
         val prefs = getSharedPreferences("Plus", Context.MODE_PRIVATE)
         var plusStatus = prefs.getBoolean("Status", false)
         var ad = findViewById<TextView>(R.id.plusAd)
-        if (plusStatus) {
-            ad.text = ""
-        } else {
-            ad.text = "Ad"
-        }
-
+        var notificationSet = findViewById<TextView>(R.id.textView24)
         if (plusStatus) {
             plusValid.text = "⭐"
+            ad.text = ""
+            notificationSet.text="You can configure your Notifications"
         } else {
             plusValid.text = ""
+            ad.text = "Ad"
+            notificationSet.text="Get plus to configure your notifications"
         }
 
     }

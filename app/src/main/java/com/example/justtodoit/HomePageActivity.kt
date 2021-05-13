@@ -73,7 +73,6 @@ class HomePageActivity : AppCompatActivity() {
             ad.text = "Ad"
         }
 
-
         val streakText = findViewById<TextView>(R.id.streakNumber)
         var sharedPreferences = getSharedPreferences("Streak", Context.MODE_PRIVATE)
         streakText.text = "Streak: " + sharedPreferences.getInt("streak", 0)
@@ -89,6 +88,42 @@ class HomePageActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
+        defaultScreen()
+    }
+
+    private fun defaultScreen() {
+        var selectedDate = findViewById<DatePicker>(R.id.datePicker2)
+        var day = selectedDate.dayOfMonth.toString()
+        var month = (selectedDate.month+1).toString()
+        if (day.length == 1) day= "0$day"
+        if (month.length == 1) month = "0$month"
+        var date_due = "$day/$month/${selectedDate.year}"
+        var list = ArrayList<String>()
+        var adapter = CustAdapter(this, list)
+        var listView = findViewById<ListView>(R.id.listView)
+        listView.adapter = adapter
+        auth = FirebaseAuth.getInstance()
+        var myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
+        myRef.orderByChild("date_due_timestamp").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                list.clear()
+                for (data: DataSnapshot in snapshot.children) {
+                    if (shown == "View All Tasks & Events") {
+                        if (mode == "Day") {
+                            if (data.child("date_due").value.toString().substring(0, 10) == date_due) {
+                                valid=true
+                                list.add(data.key.toString())
+                            }
+                        }
+                    }
+                }
+                adapter.notifyDataSetChanged()
+                invalid()
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
     }
 
     fun confirm(view: View) {
@@ -338,7 +373,7 @@ class HomePageActivity : AppCompatActivity() {
             var viewButton = conView.findViewById<Button>(R.id.viewTaskButton)
             var edit = conView.findViewById<ImageButton>(R.id.editTaskButton)
             var delete = conView.findViewById<ImageButton>(R.id.deleteTaskButton)
-            var  auth = FirebaseAuth.getInstance()
+            var auth = FirebaseAuth.getInstance()
             var name = data[position].substring(0,1).toUpperCase()+data[position].substring(1,data[position].length)
             text2?.text = name
             var  myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid).child(data[position])
