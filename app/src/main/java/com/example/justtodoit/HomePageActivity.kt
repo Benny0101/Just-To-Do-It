@@ -279,7 +279,6 @@ class HomePageActivity : AppCompatActivity() {
         }
         }
         catch(e: Exception){
-            println("hello")
         }
     }
 
@@ -532,7 +531,6 @@ class HomePageActivity : AppCompatActivity() {
             }
 
             delete.setOnClickListener {
-                deleted=true
                 var builder = AlertDialog.Builder(context)
                 var myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
                 myRef.child(data[position]).removeValue()
@@ -542,7 +540,6 @@ class HomePageActivity : AppCompatActivity() {
                 builder.setNegativeButton(R.string.done_string, null)
                 builder.show()
             }
-            deleted=false
             return conView
         }
     }
