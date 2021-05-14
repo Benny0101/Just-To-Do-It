@@ -99,6 +99,7 @@ class HomePageActivity : AppCompatActivity() {
 
 
     fun confirm(view: View) {
+        deleted=false
         var date = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK)
         var selectedDate = findViewById<DatePicker>(R.id.datePicker2)
         var day = selectedDate.dayOfMonth.toString()
@@ -502,7 +503,7 @@ class HomePageActivity : AppCompatActivity() {
                                 }
                             }
                             if (name.text.toString()!="" && temp!=name.text.toString()){
-                                valid=true
+                                deleted=true
                                 var myRef2 = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
                                 myRef2.child(temp).removeValue()
                                 if (!type) {
@@ -533,6 +534,7 @@ class HomePageActivity : AppCompatActivity() {
             delete.setOnClickListener {
                 var builder = AlertDialog.Builder(context)
                 var myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
+                deleted=true
                 myRef.child(data[position]).removeValue()
                 builder.setCancelable(true)
                 var dataName = data[position].substring(0,1).toUpperCase()+data[position].substring(1,data[position].length)
