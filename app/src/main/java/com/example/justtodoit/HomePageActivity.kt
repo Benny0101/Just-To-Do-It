@@ -27,6 +27,7 @@ import kotlin.collections.HashMap
 class HomePageActivity : AppCompatActivity() {
     companion object{
         var valid=false
+        var deleted=false
     }
     var mode="Day"
     var shown = "View All Tasks & Events"
@@ -40,18 +41,20 @@ class HomePageActivity : AppCompatActivity() {
         var sharedPref = getSharedPreferences("Streak", Context.MODE_PRIVATE)
         val c = Calendar.getInstance()
         val thisDay2 = c.get(Calendar.DAY_OF_YEAR)
-        val thisDay = sharedPref.getInt("thisDay", thisDay2)
+        var thisDay = sharedPref.getInt("thisDay", thisDay2)
         val lastDay = sharedPref.getInt("lastDate", thisDay2)
-        var counter = sharedPref.getInt("streak", 55555)
-        if (thisDay2 == lastDay - 1) {
-            counter++
-            sharedPref.edit().putInt("lastDate", lastDay)
-            sharedPref.edit().putInt("streak", counter).apply()
-            sharedPref.edit().putInt("thisDay", thisDay).apply()
-        } else {
-            sharedPref.edit().putInt("lastDate", thisDay2+1)
-            sharedPref.edit().putInt("streak", 1).apply()
-            sharedPref.edit().putInt("thisDay", thisDay).apply()
+        if (thisDay==thisDay2) {
+            var counter = sharedPref.getInt("streak", 0)
+            if (lastDay == thisDay - 1) {
+                counter++
+                sharedPref.edit().putInt("lastDate", thisDay2)
+                sharedPref.edit().putInt("streak", counter).apply()
+                sharedPref.edit().putInt("thisDay", thisDay2+1).apply()
+            } else {
+                sharedPref.edit().putInt("lastDate", thisDay2)
+                sharedPref.edit().putInt("streak", 1).apply()
+                sharedPref.edit().putInt("thisDay", thisDay2+1).apply()
+            }
         }
 
         // Add this to every activity if you wish to have the theme apply
@@ -264,14 +267,20 @@ class HomePageActivity : AppCompatActivity() {
     }
 
     private fun invalid() {
-        if (!valid) {
+        try{
+        if (!valid && !deleted) {
             var builder = AlertDialog.Builder(this)
             builder.setTitle("No Tasks/Events Scheduled")
             builder.setNegativeButton(R.string.done_string, null)
             builder.show()
         }
-        else if (valid)
-            valid=false
+            else{
+                valid=false
+        }
+        }
+        catch(e: Exception){
+            println("hello")
+        }
     }
 
     fun settings(view: View) {
@@ -523,6 +532,7 @@ class HomePageActivity : AppCompatActivity() {
             }
 
             delete.setOnClickListener {
+                deleted=true
                 var builder = AlertDialog.Builder(context)
                 var myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
                 myRef.child(data[position]).removeValue()
@@ -532,6 +542,7 @@ class HomePageActivity : AppCompatActivity() {
                 builder.setNegativeButton(R.string.done_string, null)
                 builder.show()
             }
+            deleted=false
             return conView
         }
     }
