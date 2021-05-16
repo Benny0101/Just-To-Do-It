@@ -51,10 +51,15 @@ class HomePageActivity : AppCompatActivity() {
                 sharedPref.edit().putInt("streak", counter).apply()
                 sharedPref.edit().putInt("thisDay", thisDay2).apply()
             } else {
-                sharedPref.edit().putInt("lastDate", thisDay2).apply()
+                sharedPref.edit().putInt("lastDate", thisDay2+1).apply()
                 sharedPref.edit().putInt("streak", 1).apply()
-                sharedPref.edit().putInt("thisDay", thisDay2+1).apply()
+                sharedPref.edit().putInt("thisDay", thisDay2).apply()
             }
+        }
+        else if (thisDay2-1>thisDay){
+            sharedPref.edit().putInt("lastDate", thisDay2+1).apply()
+            sharedPref.edit().putInt("streak", 1).apply()
+            sharedPref.edit().putInt("thisDay", thisDay2).apply()
         }
 
         // Add this to every activity if you wish to have the theme apply
