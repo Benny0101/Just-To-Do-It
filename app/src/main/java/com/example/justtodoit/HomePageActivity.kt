@@ -41,7 +41,6 @@ class HomePageActivity : AppCompatActivity() {
         var sharedPref = getSharedPreferences("Streak", Context.MODE_PRIVATE)
         val c = Calendar.getInstance()
         val thisDay2 = c.get(Calendar.DAY_OF_YEAR)
-        sharedPref.edit().putInt("streak", 2).apply()
         var thisDay = sharedPref.getInt("thisDay", thisDay2)
         val lastDay = sharedPref.getInt("lastDate", thisDay2)
         if (thisDay+1==thisDay2) {
