@@ -120,9 +120,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
         android:layout_marginTop="20dp"
-        android:text="How can I get in contact you?"
+        android:text="How can I get in contact with you?"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/box"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />

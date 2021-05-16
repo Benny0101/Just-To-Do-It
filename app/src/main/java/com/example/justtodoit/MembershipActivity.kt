@@ -47,11 +47,11 @@ class MembershipActivity : AppCompatActivity() {
             plusButton.visibility =  View.GONE
             plusValid.text = "⭐Plus Member!"
             ad.text = ""
-            notificationSet.text="You can configure your Notifications"
+            notificationSet.text="You can set more Notifications"
         } else {
             plusValid.text = ""
             ad.text = "Ad"
-            notificationSet.text="Get plus to configure your notifications"
+            notificationSet.text="Buy Plus to get more notifications"
         }
 
     }

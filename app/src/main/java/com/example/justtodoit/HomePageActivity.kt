@@ -27,7 +27,7 @@ import kotlin.collections.HashMap
 class HomePageActivity : AppCompatActivity() {
     companion object{
         var valid=false
-        var deleted=false
+        var edited=false
     }
     var mode="Day"
     var shown = "View All Tasks & Events"
@@ -41,17 +41,18 @@ class HomePageActivity : AppCompatActivity() {
         var sharedPref = getSharedPreferences("Streak", Context.MODE_PRIVATE)
         val c = Calendar.getInstance()
         val thisDay2 = c.get(Calendar.DAY_OF_YEAR)
+        sharedPref.edit().putInt("streak", 2).apply()
         var thisDay = sharedPref.getInt("thisDay", thisDay2)
         val lastDay = sharedPref.getInt("lastDate", thisDay2)
-        if (thisDay==thisDay2) {
+        if (thisDay+1==thisDay2) {
             var counter = sharedPref.getInt("streak", 0)
-            if (lastDay == thisDay - 1) {
+            if (lastDay == thisDay + 1) {
                 counter++
-                sharedPref.edit().putInt("lastDate", thisDay2)
+                sharedPref.edit().putInt("lastDate", thisDay2+1).apply()
                 sharedPref.edit().putInt("streak", counter).apply()
-                sharedPref.edit().putInt("thisDay", thisDay2+1).apply()
+                sharedPref.edit().putInt("thisDay", thisDay2).apply()
             } else {
-                sharedPref.edit().putInt("lastDate", thisDay2)
+                sharedPref.edit().putInt("lastDate", thisDay2).apply()
                 sharedPref.edit().putInt("streak", 1).apply()
                 sharedPref.edit().putInt("thisDay", thisDay2+1).apply()
             }
@@ -99,7 +100,7 @@ class HomePageActivity : AppCompatActivity() {
 
 
     fun confirm(view: View) {
-        deleted=false
+        edited=false
         var date = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK)
         var selectedDate = findViewById<DatePicker>(R.id.datePicker2)
         var day = selectedDate.dayOfMonth.toString()
@@ -269,7 +270,7 @@ class HomePageActivity : AppCompatActivity() {
 
     private fun invalid() {
         try{
-        if (!valid && !deleted) {
+        if (!valid && !edited) {
             var builder = AlertDialog.Builder(this)
             builder.setTitle("No Tasks/Events Scheduled")
             builder.setNegativeButton(R.string.done_string, null)
@@ -383,7 +384,7 @@ class HomePageActivity : AppCompatActivity() {
                                 key=key.replace("_"," ")
                             }
                             if (key=="descr"){
-                                key=key+"iption"
+                                key += "iption"
                             }
                             var formatKey = key.substring(0,1).toUpperCase()+key.substring(1,key.length)
                             if (data.key.toString()!="date_due_timestamp") {
@@ -450,7 +451,7 @@ class HomePageActivity : AppCompatActivity() {
                 var nameButton = conView2.findViewById<Button>(R.id.nameButton)
                 val spinner = conView2.findViewById<Spinner>(R.id.spinnerEdit)
                 var items = arrayOf("0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00",
-                        "12:00","1300","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00")
+                        "12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00")
                 val adapter = ArrayAdapter(context, R.layout.support_simple_spinner_dropdown_item,items)
                 spinner.adapter=adapter
                 spinner.onItemSelectedListener=object: AdapterView.OnItemSelectedListener {
@@ -464,6 +465,7 @@ class HomePageActivity : AppCompatActivity() {
                 var builder2 = AlertDialog.Builder(context)
 
                 dateButton.setOnClickListener {
+                    edited=true
                     var myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid).child(temp)
                     var day = date.dayOfMonth.toString()
                     var month = (date.month + 1).toString()
@@ -480,6 +482,7 @@ class HomePageActivity : AppCompatActivity() {
                 }
 
                 descrButton.setOnClickListener {
+                    edited=true
                     var myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid).child(temp)
                     myRef.child("descr").setValue(descr.text.toString())
                     builder2.setCancelable(true)
@@ -503,7 +506,7 @@ class HomePageActivity : AppCompatActivity() {
                                 }
                             }
                             if (name.text.toString()!="" && temp!=name.text.toString()){
-                                deleted=true
+                                edited=true
                                 var myRef2 = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
                                 myRef2.child(temp).removeValue()
                                 if (!type) {
@@ -534,7 +537,7 @@ class HomePageActivity : AppCompatActivity() {
             delete.setOnClickListener {
                 var builder = AlertDialog.Builder(context)
                 var myRef = FirebaseDatabase.getInstance().getReference("userTasks").child(auth.currentUser.uid)
-                deleted=true
+                edited=true
                 myRef.child(data[position]).removeValue()
                 builder.setCancelable(true)
                 var dataName = data[position].substring(0,1).toUpperCase()+data[position].substring(1,data[position].length)
